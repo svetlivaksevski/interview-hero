@@ -9,25 +9,25 @@ export default function Navigation() {
     <ul className="navigation">
       <li className="navbuttons">
         <a href="/">
-          <Image src={HomeIcon} width={20} />
+          <Image src={HomeIcon} width={20} alt="Home page icon" />
           <span> Home</span>
         </a>
       </li>
       <li className="navbuttons">
         <a href="/art-pieces">
-          <Image src={AddIcon} width={20} />
+          <Image src={AddIcon} width={20} alt="Add qustion page icon" />
           <span>Add question</span>
         </a>
       </li>
       <li className="navbuttons">
         <a href="/favorites">
-          <Image src={ListIcon} width={20} />
+          <Image src={ListIcon} width={20} alt="All questions page icon" />
           <span> All questions</span>
         </a>
       </li>
       <li className="navbuttons">
         <a href="/favorites">
-          <Image src={UserIcon} width={20} />
+          <Image src={UserIcon} width={20} alt="Profile page icon" />
           <span> Profile</span>
         </a>
       </li>
