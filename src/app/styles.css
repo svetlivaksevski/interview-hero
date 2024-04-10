@@ -5,9 +5,55 @@
   list-style-type: none;
   position: fixed;
   width: 100%;
-  background-color: #fdfdfd;
+  background-color: #feffff;
   bottom: 0;
-  padding: 20px;
+  padding: 10px;
   margin-bottom: 0;
   font-size: 18px;
+  border-top: 1px solid #def2f1;
+}
+
+.navbuttons {
+  font-size: 12px;
+}
+
+a {
+  text-decoration: none;
+  color: #2b7a78;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+span {
+  padding-top: 10px;
+}
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  font-size: 16px;
+  top: 0;
+  padding: 25px;
+  margin-top: 0;
+}
+
+.intro {
+  font-size: 25px;
+  font-weight: bold;
+  max-width: 60rem;
+}
+
+.introtext {
+  font-size: 16px;
+  max-width: 60rem;
+  color: #3aafa9;
+  padding-bottom: 20px;
+}
+
+.randomquestion {
+  padding: 100px;
+  border-style: dashed;
+  margin: 10px;
 }
