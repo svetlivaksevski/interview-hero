@@ -14,19 +14,19 @@ export default function Navigation() {
         </a>
       </li>
       <li className="navbuttons">
-        <a href="/art-pieces">
+        <a href="#">
           <Image src={AddIcon} width={20} alt="Add qustion page icon" />
           <span>Add question</span>
         </a>
       </li>
       <li className="navbuttons">
-        <a href="/favorites">
+        <a href="#">
           <Image src={ListIcon} width={20} alt="All questions page icon" />
           <span> All questions</span>
         </a>
       </li>
       <li className="navbuttons">
-        <a href="/favorites">
+        <a href="#">
           <Image src={UserIcon} width={20} alt="Profile page icon" />
           <span> Profile</span>
         </a>
