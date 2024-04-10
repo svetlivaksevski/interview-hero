@@ -1,0 +1,13 @@
+.navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  list-style-type: none;
+  position: fixed;
+  width: 100%;
+  background-color: #fdfdfd;
+  bottom: 0;
+  padding: 20px;
+  margin-bottom: 0;
+  font-size: 18px;
+}
