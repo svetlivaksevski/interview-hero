@@ -20,7 +20,7 @@ export default function Navigation() {
         </a>
       </li>
       <li className="navbuttons">
-        <a href="#">
+        <a href="/question">
           <Image src={ListIcon} width={20} alt="All questions page icon" />
           <span> All questions</span>
         </a>

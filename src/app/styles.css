@@ -57,3 +57,10 @@ span {
   border-style: dashed;
   margin: 10px;
 }
+
+.container-questions-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 20px;
+}
