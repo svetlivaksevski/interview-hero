@@ -8,16 +8,6 @@ export default function Home() {
   return (
     <main>
       <Header />
-      <section>
-        <p className="intro">
-          Prepare better for your next interview. Just in one click!
-        </p>
-        <p className="introtext">
-          Interview hero is a platform where you can add questions you&apos;ve
-          been ask during an interivew and get useful tips from our users. There
-          are no more difficult quesitons.
-        </p>
-      </section>
       <Randomquestion />
       <div>Add question button</div>
       <div>Recent added</div>
