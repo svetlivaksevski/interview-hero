@@ -14,7 +14,7 @@ export default function Navigation() {
         </a>
       </li>
       <li className="navbuttons">
-        <a href="#">
+        <a href="/create">
           <Image src={AddIcon} width={20} alt="Add qustion page icon" />
           <span>Add question</span>
         </a>
