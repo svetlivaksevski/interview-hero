@@ -12,7 +12,6 @@ export async function POST(request, response) {
   await dbConnect();
   try {
     const entryData = await request.json();
-    console.log("entrydata", entryData);
 
     await Question.create(entryData);
 

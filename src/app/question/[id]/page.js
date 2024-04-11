@@ -1,6 +1,6 @@
 "use client";
 // import Link from "next/link";
-// import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import useSWR from "swr";
 import Navigation from "../../components/Navigation";
 import Header from "../../components/Header/";
@@ -8,11 +8,23 @@ import Header from "../../components/Header/";
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
 export default function QuestionPage({ params }) {
+  const router = useRouter();
   const { id } = params;
   const { data, error, isLoading } = useSWR(`/api/question/${id}`, fetcher);
 
   if (error) return <div>{`Failed to load :(`}</div>;
   if (isLoading) return <div>Loading Question...</div>;
+
+  async function deleteQuestion() {
+    const response = await fetch(`/api/question/${id}`, {
+      method: "DELETE",
+    });
+    if (response.ok) {
+      router.push("/question");
+    } else {
+      console.error(response.status);
+    }
+  }
 
   return (
     <>
@@ -22,6 +34,8 @@ export default function QuestionPage({ params }) {
         <p>{data.question}</p>
         <h2>Your answer:</h2>
         <p>{data.answer}</p>
+        <button>Edit</button>
+        <button onClick={deleteQuestion}>Delete</button>
       </div>
 
       {/* Comments section */}
