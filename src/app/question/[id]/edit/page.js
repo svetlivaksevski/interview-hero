@@ -36,7 +36,7 @@ export default function EditPage({ params }) {
 
   // if (!isReady || isLoading || error) return <h2>Loading...</h2>;
 
-  console.log("newquestion", question);
+  // console.log("newquestion", question);
   return (
     <>
       <h2>Edit Question</h2>

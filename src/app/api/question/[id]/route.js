@@ -6,7 +6,7 @@ export async function GET(req, { params }) {
   await dbConnect();
   const { id } = params;
   const question = await Question.findById(id);
-  console.log("question1", question);
+
   return NextResponse.json(question, { status: 200 });
 }
 

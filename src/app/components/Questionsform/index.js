@@ -14,7 +14,7 @@ export default function QuestionsForm({
   }
   return (
     <div>
-      <form class="form" aria-labelledby="Form" onSubmit={handleSubmit}>
+      <form className="form" aria-labelledby="Form" onSubmit={handleSubmit}>
         <label htmlFor="question">Question:</label>
         <textarea
           id="question"
