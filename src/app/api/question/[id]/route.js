@@ -14,11 +14,11 @@ export async function PUT(req, { params }) {
   try {
     await dbConnect();
     const { id } = params;
-    console.log("idid-------------", id);
+
     const question = await Question.findByIdAndUpdate(id, {
       $set: Question,
     });
-    console.log("quest---------------------", quesiton);
+
     return NextResponse.status(200).json(question, {
       status: "Question edited",
     });

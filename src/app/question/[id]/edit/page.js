@@ -40,7 +40,7 @@ export default function EditPage({ params }) {
   return (
     <>
       <h2>Edit Question</h2>
-      <Link href={`/questoin/${id}`}>
+      <Link href={`/question/${id}`}>
         <p>back</p>
       </Link>
       <QuestionsForm
