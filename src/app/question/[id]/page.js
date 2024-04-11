@@ -2,21 +2,21 @@
 // import Link from "next/link";
 // import { useRouter } from "next/navigation";
 import useSWR from "swr";
+import Navigation from "../../components/Navigation";
+import Header from "../../components/Header/";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
 export default function QuestionPage({ params }) {
   const { id } = params;
   const { data, error, isLoading } = useSWR(`/api/question/${id}`, fetcher);
-  console.log(data);
+
   if (error) return <div>{`Failed to load :(`}</div>;
   if (isLoading) return <div>Loading Question...</div>;
 
   return (
     <>
-      <a href="/">
-        <p>back</p>
-      </a>
+      <Header />
       <div>
         <h2>Your question:</h2>
         <p>{data.question}</p>
@@ -36,6 +36,7 @@ export default function QuestionPage({ params }) {
       </ButtonContainer> */}
 
       {/* Uncomment and implement delete functionality if needed */}
+      <Navigation />
     </>
   );
 }
