@@ -9,3 +9,17 @@ export async function GET(req, { params }) {
 
   return NextResponse.json(question, { status: 200 });
 }
+
+export async function DELETE(req, { params }) {
+  try {
+    await dbConnect();
+    const { id } = params;
+    await Question.findByIdAndDelete(id);
+    return NextResponse.json({
+      status: 200,
+    });
+  } catch (e) {
+    console.error(e);
+    return NextResponse.status(400).json({ error: e.message });
+  }
+}
