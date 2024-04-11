@@ -62,12 +62,18 @@ span {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 20px;
+  padding: 40px;
+  border: 1px solid #def2f1;
 }
 
 .container {
   margin-bottom: 100px;
   margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 350px;
+  flex-wrap: wrap;
 }
 
 .form {

@@ -6,8 +6,26 @@ export async function GET(req, { params }) {
   await dbConnect();
   const { id } = params;
   const question = await Question.findById(id);
-
+  console.log("question1", question);
   return NextResponse.json(question, { status: 200 });
+}
+
+export async function PUT(req, { params }) {
+  try {
+    await dbConnect();
+    const { id } = params;
+    console.log("idid-------------", id);
+    const question = await Question.findByIdAndUpdate(id, {
+      $set: Question,
+    });
+    console.log("quest---------------------", quesiton);
+    return NextResponse.status(200).json(question, {
+      status: "Question edited",
+    });
+  } catch (e) {
+    console.error(e);
+    return response.status(400).json({ error: e.message });
+  }
 }
 
 export async function DELETE(req, { params }) {

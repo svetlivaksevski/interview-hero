@@ -1,5 +1,5 @@
 "use client";
-// import Link from "next/link";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import useSWR from "swr";
 import Navigation from "../../components/Navigation";
@@ -34,7 +34,7 @@ export default function QuestionPage({ params }) {
         <p>{data.question}</p>
         <h2>Your answer:</h2>
         <p>{data.answer}</p>
-        <button>Edit</button>
+        <Link href={`/question/${id}/edit`}>Edit</Link>
         <button onClick={deleteQuestion}>Delete</button>
       </div>
 
