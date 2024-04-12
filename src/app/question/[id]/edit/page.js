@@ -11,7 +11,7 @@ const fetcher = (url) => fetch(url).then((r) => r.json());
 export default function EditPage({ params }) {
   const [loadingAddQuestion, setLoadingAddQuestion] = useState(false);
   const router = useRouter();
-  const { isReady } = router;
+
   const { id } = params;
   const {
     data: question,
@@ -29,12 +29,11 @@ export default function EditPage({ params }) {
     });
 
     if (response.ok) {
-      alert("You edited this question successfully!");
       router.push(`/question/${id}`);
     }
   }
 
-  // if (!isReady || isLoading || error) return <h2>Loading...</h2>;
+  if (isLoading || error) return <h2>Loading...</h2>;
 
   // console.log("newquestion", question);
   return (

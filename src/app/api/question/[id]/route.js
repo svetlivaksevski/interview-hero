@@ -14,14 +14,12 @@ export async function PUT(req, { params }) {
   try {
     await dbConnect();
     const { id } = params;
+    const body = await req.json();
 
-    const question = await Question.findByIdAndUpdate(id, {
-      $set: Question,
+    await Question.findByIdAndUpdate(id, {
+      $set: body,
     });
-
-    return NextResponse.status(200).json(question, {
-      status: "Question edited",
-    });
+    return NextResponse.json({ status: 200 });
   } catch (e) {
     console.error(e);
     return response.status(400).json({ error: e.message });
