@@ -1,6 +1,8 @@
 export default function QuestionsForm({
   onSubmit,
   loadingAddQuestion,
+  defaultData,
+  formName,
   setLoadingAddQuestion,
 }) {
   async function handleSubmit(event) {
@@ -12,14 +14,14 @@ export default function QuestionsForm({
   }
   return (
     <div>
-      <form class="form" aria-labelledby="Form" onSubmit={handleSubmit}>
+      <form className="form" aria-labelledby="Form" onSubmit={handleSubmit}>
         <label htmlFor="question">Question:</label>
         <textarea
           id="question"
           name="question"
           rows="5"
           cols="30"
-          placeholder="Enter your question here"
+          defaultValue={defaultData?.question}
         />
         <label htmlFor="answer">Answer:</label>
 
@@ -28,7 +30,7 @@ export default function QuestionsForm({
           name="answer"
           rows="5"
           cols="30"
-          placeholder="Enter your answer here"
+          defaultValue={defaultData?.answer}
         />
         <button type="submit">Submit</button>
       </form>

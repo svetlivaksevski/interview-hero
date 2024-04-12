@@ -10,6 +10,22 @@ export async function GET(req, { params }) {
   return NextResponse.json(question, { status: 200 });
 }
 
+export async function PUT(req, { params }) {
+  try {
+    await dbConnect();
+    const { id } = params;
+    const body = await req.json();
+
+    await Question.findByIdAndUpdate(id, {
+      $set: body,
+    });
+    return NextResponse.json({ status: 200 });
+  } catch (e) {
+    console.error(e);
+    return response.status(400).json({ error: e.message });
+  }
+}
+
 export async function DELETE(req, { params }) {
   try {
     await dbConnect();
