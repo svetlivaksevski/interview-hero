@@ -1,8 +1,8 @@
 "use client";
 
-import Navigation from "../components/Navigation/";
-import Header from "../components/Header";
-import QuestionsForm from "../components/Questionsform";
+import Navigation from "../../components/Navigation";
+import Header from "../../components/Header";
+import QuestionsForm from "../../components/Questionsform";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 

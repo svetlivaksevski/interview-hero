@@ -2,7 +2,7 @@
 import useSWR from "swr";
 
 import Image from "next/image";
-import RandomIcon from "../../../../public/icons/dice-solid.svg";
+import RandomIcon from "@/images/icons/dice-solid.svg";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 

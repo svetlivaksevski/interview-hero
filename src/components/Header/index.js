@@ -1,4 +1,4 @@
-import Logo from "../../../../public/icons/Logo.png";
+import Logo from "@/images/icons/Logo.png";
 import Image from "next/image";
 
 export default function Header() {

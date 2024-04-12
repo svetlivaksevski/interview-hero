@@ -1,7 +1,7 @@
 "use client";
 import useSWR from "swr";
-import Navigation from "../components/Navigation/";
-import Header from "../components/Header/";
+import Navigation from "../../components/Navigation";
+import Header from "../../components/Header";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
