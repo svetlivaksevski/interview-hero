@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import useSWR from "swr";
 import Navigation from "../../../components/Navigation";
 import Header from "../../../components/Header";
+import Comments from "@/components/Comments";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
@@ -46,18 +47,8 @@ export default function QuestionPage({ params }) {
         )}
       </div>
 
-      {/* Comments section */}
-      {/* <Comments questionId={id} comments={data?.comments || []} /> */}
+      <Comments questionId={id} comments={data?.comments || []} />
 
-      {/* <Link href={`/places/${id}/edit`} passHref legacyBehavior>
-          <StyledLink>Edit</StyledLink>
-        </Link>
-        <StyledButton onClick={deletePlace} type="button" variant="delete">
-          Delete
-        </StyledButton>
-      </ButtonContainer> */}
-
-      {/* Uncomment and implement delete functionality if needed */}
       <Navigation />
     </>
   );

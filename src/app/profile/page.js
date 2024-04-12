@@ -2,11 +2,13 @@
 
 import Navigation from "@/components/Navigation";
 import Header from "@/components/Header";
-import { signIn, useSession } from "next-auth/react";
+import SignInPage from "@/components/SignInPage";
+import { signIn, useSession, signOut } from "next-auth/react";
 
 export default function Profile() {
   const session = useSession();
 
+  console.log(session);
   if (session.status === "loading") {
     return null;
   }
@@ -21,7 +23,9 @@ export default function Profile() {
     return (
       <>
         <Header />
-
+        <img src={session.data.user.image} className="profilepicture" />
+        <h1>You sing-up as {session.data.user.name}</h1>
+        <button onClick={signOut}>Sign Out</button>
         <Navigation />
 
         {/* 

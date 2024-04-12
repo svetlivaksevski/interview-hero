@@ -83,3 +83,8 @@ span {
   margin: 30px;
   gap: 10px;
 }
+
+.profilepicture {
+  border-radius: 100px;
+  width: 150px;
+}
