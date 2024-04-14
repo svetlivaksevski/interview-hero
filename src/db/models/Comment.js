@@ -1,7 +1,9 @@
+import { ObjectId } from "mongodb";
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 const commentSchema = new Schema({
-  name: { type: String, required: true },
+  userId: { type: Schema.Types.ObjectId, ref: "User" },
+  created: { type: Date, default: Date.now },
   comment: { type: String, required: true },
 });
 

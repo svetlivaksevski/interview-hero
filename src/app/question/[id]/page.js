@@ -6,6 +6,7 @@ import useSWR from "swr";
 import Navigation from "../../../components/Navigation";
 import Header from "../../../components/Header";
 import Comments from "@/components/Comments";
+import CommentForm from "@/components/CommentForm";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
@@ -48,6 +49,7 @@ export default function QuestionPage({ params }) {
       </div>
 
       <Comments questionId={id} comments={data?.comments || []} />
+      <CommentForm questionId={id} comments={data?.comments || []} />
 
       <Navigation />
     </>
