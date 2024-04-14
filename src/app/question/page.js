@@ -75,7 +75,7 @@ export default function QuestionPage() {
                   )}
                 </>
               ) : (
-                <h2>No results found for "{searchTerm}"</h2>
+                <h2>No results found for &quot;{searchTerm}&quot;</h2>
               )}
             </div>
           )}
