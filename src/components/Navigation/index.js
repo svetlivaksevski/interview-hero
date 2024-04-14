@@ -1,8 +1,8 @@
 import Image from "next/image";
-import HomeIcon from "../../../../public/icons/house-solid.svg";
-import AddIcon from "../../../../public/icons/plus-solid.svg";
-import ListIcon from "../../../../public/icons/list-ul-solid.svg";
-import UserIcon from "../../../../public/icons/circle-user-solid.svg";
+import HomeIcon from "@/images/icons/house-solid.svg";
+import AddIcon from "@/images/icons/plus-solid.svg";
+import ListIcon from "@/images/icons/list-ul-solid.svg";
+import UserIcon from "@/images/icons/circle-user-solid.svg";
 
 export default function Navigation() {
   return (
@@ -26,7 +26,7 @@ export default function Navigation() {
         </a>
       </li>
       <li className="navbuttons">
-        <a href="#">
+        <a href="/profile">
           <Image src={UserIcon} width={20} alt="Profile page icon" />
           <span> Profile</span>
         </a>

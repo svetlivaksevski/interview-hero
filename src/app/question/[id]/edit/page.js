@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
 import useSWR from "swr";
-import QuestionsForm from "../../../components/Questionsform";
+import QuestionsForm from "../../../../components/Questionsform";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
@@ -35,7 +35,6 @@ export default function EditPage({ params }) {
 
   if (isLoading || error) return <h2>Loading...</h2>;
 
-  // console.log("newquestion", question);
   return (
     <>
       <h2>Edit Question</h2>

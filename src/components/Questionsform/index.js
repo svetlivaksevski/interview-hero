@@ -12,9 +12,11 @@ export default function QuestionsForm({
     const entryData = Object.fromEntries(formData);
     onSubmit(entryData);
   }
+
   return (
     <div>
       <form className="form" aria-labelledby="Form" onSubmit={handleSubmit}>
+        <h1> {defaultData ? "Edit question" : "Add question"}</h1>
         <label htmlFor="question">Question:</label>
         <textarea
           id="question"
@@ -32,6 +34,7 @@ export default function QuestionsForm({
           cols="30"
           defaultValue={defaultData?.answer}
         />
+
         <button type="submit">Submit</button>
       </form>
     </div>

@@ -1,13 +1,17 @@
 "use client";
 import Link from "next/link";
+import { useSession, signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import useSWR from "swr";
-import Navigation from "../../components/Navigation";
-import Header from "../../components/Header/";
+import Navigation from "../../../components/Navigation";
+import Header from "../../../components/Header";
+import Comments from "@/components/Comments";
+import CommentForm from "@/components/CommentForm";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
 export default function QuestionPage({ params }) {
+  const { data: session } = useSession();
   const router = useRouter();
   const { id } = params;
   const { data, error, isLoading } = useSWR(`/api/question/${id}`, fetcher);
@@ -26,6 +30,7 @@ export default function QuestionPage({ params }) {
     }
   }
 
+  console.log(data);
   return (
     <>
       <Header />
@@ -34,22 +39,19 @@ export default function QuestionPage({ params }) {
         <p>{data.question}</p>
         <h2>Your answer:</h2>
         <p>{data.answer}</p>
-        <Link href={`/question/${id}/edit`}>Edit</Link>
-        <button onClick={deleteQuestion}>Delete</button>
+        <button onClick={signIn}>SignIn</button>
+        <button onClick={signOut}>SignOut</button>
+        {session && (
+          <>
+            <Link href={`/question/${id}/edit`}>Edit</Link>
+            <button onClick={deleteQuestion}>Delete</button>
+          </>
+        )}
       </div>
 
-      {/* Comments section */}
-      {/* <Comments questionId={id} comments={data?.comments || []} /> */}
+      <Comments questionId={id} comments={data?.comments || []} />
+      <CommentForm questionId={id} comments={data?.comments || []} />
 
-      {/* <Link href={`/places/${id}/edit`} passHref legacyBehavior>
-          <StyledLink>Edit</StyledLink>
-        </Link>
-        <StyledButton onClick={deletePlace} type="button" variant="delete">
-          Delete
-        </StyledButton>
-      </ButtonContainer> */}
-
-      {/* Uncomment and implement delete functionality if needed */}
       <Navigation />
     </>
   );

@@ -53,9 +53,10 @@ span {
 }
 
 .randomquestion {
-  padding: 100px;
+  padding: 50px;
   border-style: dashed;
   margin: 10px;
+  width: 350px;
 }
 
 .container-questions-list {
@@ -64,16 +65,17 @@ span {
   align-items: center;
   padding: 40px;
   border: 1px solid #def2f1;
+  width: 350px;
+  margin: 10px;
 }
 
 .container {
   margin-bottom: 100px;
-  margin-top: 50px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 350px;
-  flex-wrap: wrap;
+}
+
+.container-questions-list-recently {
+  margin-bottom: 100px;
+  margin-top: 20px;
 }
 
 .form {
@@ -82,4 +84,50 @@ span {
   align-items: center;
   margin: 30px;
   gap: 10px;
+}
+
+.profilepicture {
+  border-radius: 100px;
+  width: 150px;
+}
+
+.container-recently-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  border: 1px solid #def2f1;
+  width: 350px;
+  margin: 10px;
+}
+
+input {
+  font-family: "Lora", serif;
+  font-style: italic;
+  font-size: 18px;
+  margin-top: 20px;
+  border-radius: 40px;
+  padding: 12px 70px;
+  background-image: url("../images/icons/magnifying-glass-solid.svg");
+  background-position: 15px 14px;
+  background-repeat: no-repeat;
+  background-size: 20px;
+  border: 1px solid #def2f1;
+}
+
+.search-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.showmore {
+  font-family: "Lora", serif;
+  font-style: italic;
+  font-size: 16px;
+  color: #17252a;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
 }
