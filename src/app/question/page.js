@@ -38,45 +38,50 @@ export default function QuestionPage() {
   return (
     <>
       <Header />
-      <div className="container">
-        <form onSubmit={(e) => e.preventDefault()}>
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={handleSearchChange}
-            placeholder="Search questions..."
-          />
-        </form>
-        {error ? (
-          <div>Failed to load</div>
-        ) : isLoading ? (
-          <div>Loading questions...</div>
-        ) : (
-          <div>
-            {filteredQuestions.length > 0 ? (
-              <>
-                <h2>Search Results</h2>
-                {filteredQuestions.slice(0, displayCount).map((q) => (
-                  <div className="container-questions-list" key={q._id}>
-                    <h2>Your question:</h2>
-                    <p>{q.question}</p>
-                    <h3>See the answer:</h3>
-                    <a href={`question/${q._id}`}>
-                      Click here to see the answer...
-                    </a>
-                  </div>
-                ))}
-                {filteredQuestions.length > displayCount && (
-                  <button onClick={handleShowMore}>See more...</button>
-                )}
-              </>
-            ) : (
-              <h2>No results found for "{searchTerm}"</h2>
-            )}
-          </div>
-        )}
-        <Navigation />
-      </div>
+      <main>
+        <div className="container">
+          <form className="search-bar" onSubmit={(e) => e.preventDefault()}>
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={handleSearchChange}
+              placeholder="Search questions..."
+            />
+            <h2>Search Results</h2>
+            {filteredQuestions.length} available results
+          </form>
+          {error ? (
+            <div>Failed to load</div>
+          ) : isLoading ? (
+            <div>Loading questions...</div>
+          ) : (
+            <div>
+              {filteredQuestions.length > 0 ? (
+                <>
+                  {filteredQuestions.slice(0, displayCount).map((q) => (
+                    <div className="container-questions-list" key={q._id}>
+                      <h2>Your question:</h2>
+                      <p>{q.question}</p>
+                      <h3>See the answer:</h3>
+                      <a href={`question/${q._id}`}>
+                        Click here to see the answer...
+                      </a>
+                    </div>
+                  ))}
+                  {filteredQuestions.length > displayCount && (
+                    <span className="showmore" onClick={handleShowMore}>
+                      Show more
+                    </span>
+                  )}
+                </>
+              ) : (
+                <h2>No results found for "{searchTerm}"</h2>
+              )}
+            </div>
+          )}
+        </div>
+      </main>
+      <Navigation />
     </>
   );
 }

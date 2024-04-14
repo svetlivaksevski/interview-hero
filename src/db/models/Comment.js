@@ -1,5 +1,6 @@
 import { ObjectId } from "mongodb";
 import mongoose from "mongoose";
+
 const { Schema } = mongoose;
 const commentSchema = new Schema({
   userId: { type: Schema.Types.ObjectId, ref: "User" },

@@ -30,6 +30,7 @@ export default function QuestionPage({ params }) {
     }
   }
 
+  console.log(data);
   return (
     <>
       <Header />
