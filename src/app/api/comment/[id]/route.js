@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextResponse, userAgent } from "next/server";
 import Comment from "@/db/models/Comment";
 import dbConnect from "@/db/connect";
 import { getServerSession } from "next-auth";
@@ -7,9 +7,9 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 export async function GET(req, { params }) {
   await dbConnect();
   const { id } = params;
-  const comment = await Comment.findById(id);
+  const comments = await Comment.find({ questionId: { $eq: id } });
 
-  return NextResponse.json(comment, { status: 200 });
+  return NextResponse.json(comments, { status: 200 });
 }
 
 export async function POST(request, { params }) {
@@ -23,7 +23,8 @@ export async function POST(request, { params }) {
     await Comment.create({
       ...entryData,
       questionId: id,
-      userId: session.user.userId,
+      userName: session.user.name,
+      profileImage: session.user.image,
     });
 
     return NextResponse.json({ entryData }, { status: 201 });
@@ -50,9 +51,10 @@ export async function PUT(req, { params }) {
 }
 
 export async function DELETE(req, { params }) {
+  await dbConnect();
+  const { id } = params;
+
   try {
-    await dbConnect();
-    const { id } = params;
     await Comment.findByIdAndDelete(id);
     return NextResponse.json({
       status: 200,

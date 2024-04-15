@@ -10,7 +10,7 @@ import CommentForm from "@/components/CommentForm";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
-export default function QuestionPage({ params }) {
+export default function QuestionPage({ params, questionId }) {
   const { data: session } = useSession();
   const router = useRouter();
   const { id } = params;
@@ -20,7 +20,7 @@ export default function QuestionPage({ params }) {
   if (isLoading) return <div>Loading Question...</div>;
 
   async function deleteQuestion() {
-    const response = await fetch(`/api/question/${id}`, {
+    const response = await fetch(`/api/question/${questionId}`, {
       method: "DELETE",
     });
     if (response.ok) {
@@ -30,7 +30,7 @@ export default function QuestionPage({ params }) {
     }
   }
 
-  const onlyDate = data.created.substring(0, 10);
+  const onlyDate = data.createdAt.substring(0, 10);
 
   return (
     <>
@@ -40,7 +40,7 @@ export default function QuestionPage({ params }) {
         <p>{data.question}</p>
         <h2>Your answer:</h2>
         <p>{data.answer}</p>
-        <h3>Created: {onlyDate}</h3>
+        <p>Created: {onlyDate}</p>
         <button onClick={signIn}>SignIn</button>
         <button onClick={signOut}>SignOut</button>
         {session?.user.userId === data?.userId ? (

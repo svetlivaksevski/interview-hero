@@ -10,7 +10,6 @@ export default function CommentForm({ questionId }) {
   const router = useRouter();
 
   const handleSubmit = (event) => {
-    event.preventDefault();
     const formData = new FormData(event.target);
     const comment = Object.fromEntries(formData);
     AddComment(comment);
@@ -25,6 +24,11 @@ export default function CommentForm({ questionId }) {
         },
         body: JSON.stringify(entryData),
       });
+
+      if (response.ok) {
+        router.push(`/question/${questionId}`);
+      }
+
       if (!response.ok) {
         throw new Error("Error submitting comment");
       }
@@ -34,16 +38,6 @@ export default function CommentForm({ questionId }) {
     }
   }
 
-  // async function deleteComment() {
-  //   const response = await fetch(`/api/comment/${id}`, {
-  //     method: "DELETE",
-  //   });
-  //   if (response.ok) {
-  //     router.push("/question");
-  //   } else {
-  //     console.error(response.status);
-  //   }
-  // }
   return (
     <form onSubmit={handleSubmit}>
       <textarea
@@ -52,7 +46,7 @@ export default function CommentForm({ questionId }) {
         placeholder="Enter your comment"
         required
       />
-      {/* <button onClick={deleteComment}>Delete</button> */}
+
       <button type="submit">Submit</button>
     </form>
   );
