@@ -17,7 +17,6 @@ export default function CommentForm({ questionId }) {
   };
 
   async function AddComment(entryData) {
-    console.log("data", entryData);
     try {
       const response = await fetch(`/api/comment/${questionId}`, {
         method: "POST",
