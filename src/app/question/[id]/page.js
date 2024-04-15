@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import useSWR from "swr";
 import Navigation from "../../../components/Navigation";
@@ -35,27 +35,37 @@ export default function QuestionPage({ params, questionId }) {
   return (
     <>
       <Header />
-      <div>
-        <h2>Your question:</h2>
-        <p>{data.question}</p>
-        <h2>Your answer:</h2>
-        <p>{data.answer}</p>
-        <p>Created: {onlyDate}</p>
-        <button onClick={signIn}>SignIn</button>
-        <button onClick={signOut}>SignOut</button>
-        {session?.user.userId === data?.userId ? (
-          <>
-            <Link href={`/question/${id}/edit`}>Edit</Link>
-            <button onClick={deleteQuestion}>Delete</button>
-          </>
-        ) : (
-          <p></p>
-        )}
+      <div className="container-questions">
+        <div className="questions-data">
+          <h2>Your question:</h2>
+          <p>{data.question}</p>
+          <h2>Your answer:</h2>
+          <p>{data.answer}</p>
+          <div className="dots"></div>
+          <div className="user-info">
+            <p>Posted by {data.userName}</p>
+
+            <p>Created: {onlyDate}</p>
+          </div>
+          <div className="buttons-question">
+            {session?.user.userId === data?.userId ? (
+              <>
+                <Link href={`/question/${id}/edit`} className="buttons">
+                  Edit
+                </Link>
+                <button onClick={deleteQuestion} className="buttons">
+                  Delete
+                </button>
+              </>
+            ) : (
+              <p></p>
+            )}
+          </div>
+        </div>
+
+        <Comments questionId={id} />
+        <CommentForm questionId={id} />
       </div>
-
-      <Comments questionId={id} comments={data?.comments || []} />
-      <CommentForm questionId={id} comments={data?.comments || []} />
-
       <Navigation />
     </>
   );

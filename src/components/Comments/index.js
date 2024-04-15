@@ -31,19 +31,40 @@ export default function Comments({ params, questionId }) {
       console.error(response.status);
     }
   }
+  let onlyDate;
 
+  comments.forEach((date) => {
+    const createdDate = date.created;
+    onlyDate = createdDate.substring(0, 10);
+  });
   return (
     <div>
-      <h2>Comments</h2>
-      {comments.map((comment) => (
-        <div key={comment._id}>
-          <p>{comment.comment}</p>
-
-          <p>Author: {comment.userName}</p>
-          <img src={comment.profileImage} width={50} />
-          <button onClick={() => deleteComment(comment._id)}>Delete</button>
-        </div>
-      ))}
+      <div className="comments-container">
+        <h2>Comments</h2>
+        {comments.map((comment) => (
+          <div key={comment._id} className="comments-container-content">
+            <div className="comment-profile-info">
+              <img
+                src={comment.profileImage}
+                width={50}
+                className="imagecomment"
+              />
+              <div className="p-comment">
+                <p className="author">{comment.userName}</p>
+                <p className="add-comment">added on {onlyDate}</p>
+              </div>
+            </div>
+            <p>{comment.comment}</p>
+            <div className="dots"></div>
+            <button
+              onClick={() => deleteComment(comment._id)}
+              className="buttons"
+            >
+              Delete
+            </button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

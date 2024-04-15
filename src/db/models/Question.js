@@ -7,6 +7,7 @@ const questionSchema = new Schema(
     question: { type: String, required: true },
     answer: { type: String, required: true },
     userId: { type: Schema.Types.ObjectId, ref: "User" },
+    userName: { type: String },
   },
   {
     timestamps: true,

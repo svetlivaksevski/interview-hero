@@ -39,15 +39,18 @@ export default function CommentForm({ questionId }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="comment-form">
       <textarea
         name="comment"
         type="text"
-        placeholder="Enter your comment"
+        placeholder="Enter your comment..."
+        className="comment-section"
         required
       />
 
-      <button type="submit">Submit</button>
+      <button type="submit" className="buttons">
+        Submit
+      </button>
     </form>
   );
 }

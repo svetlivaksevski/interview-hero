@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import Question from "../../../db/models/Question";
 import dbConnect from "../../../db/connect";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 export async function GET(request) {
   await dbConnect();
@@ -10,10 +12,11 @@ export async function GET(request) {
 
 export async function POST(request, response) {
   await dbConnect();
+  const session = await getServerSession(authOptions);
   try {
     const entryData = await request.json();
 
-    await Question.create(entryData);
+    await Question.create({ ...entryData, userName: session.user.name });
 
     return NextResponse.json({ entryData }, { status: 201 });
   } catch (e) {
