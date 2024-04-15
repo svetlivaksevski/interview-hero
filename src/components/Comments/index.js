@@ -17,8 +17,6 @@ export default function Comments({ params, questionId }) {
     isLoading,
   } = useSWR(`/api/comment/${questionId}`, fetcher);
 
-  console.log(comments);
-
   if (error) return <div>{`Failed to load :(`}</div>;
   if (isLoading) return <div>Loading Question...</div>;
 
