@@ -9,39 +9,42 @@ export default function CommentForm({ questionId }) {
   const [comment, setComment] = useState("");
   const router = useRouter();
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
-    const comment = formData.get("comment");
-    await AddComment(comment);
-    // const body = {
-    //   place: place,
-    //   newComment: {
-    //     name: name,
-    //     comment: comment,
-    //   },
-    // }
-    console.log("comment", comment);
-
-    async function AddComment(entryData) {
-      console.log("data", entryData);
-      try {
-        const response = await fetch(`/api/comment/${questionId}`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(entryData),
-        });
-        if (!response.ok) {
-          throw new Error("Error submitting comment");
-        }
-        setComment("");
-      } catch (error) {
-        console.error(error);
-      }
-    }
+    const comment = Object.fromEntries(formData);
+    AddComment(comment);
   };
+
+  async function AddComment(entryData) {
+    console.log("data", entryData);
+    try {
+      const response = await fetch(`/api/comment/${questionId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(entryData),
+      });
+      if (!response.ok) {
+        throw new Error("Error submitting comment");
+      }
+      setComment("");
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  // async function deleteComment() {
+  //   const response = await fetch(`/api/comment/${id}`, {
+  //     method: "DELETE",
+  //   });
+  //   if (response.ok) {
+  //     router.push("/question");
+  //   } else {
+  //     console.error(response.status);
+  //   }
+  // }
   return (
     <form onSubmit={handleSubmit}>
       <textarea
@@ -50,6 +53,7 @@ export default function CommentForm({ questionId }) {
         placeholder="Enter your comment"
         required
       />
+      {/* <button onClick={deleteComment}>Delete</button> */}
       <button type="submit">Submit</button>
     </form>
   );

@@ -6,24 +6,29 @@ import { useRouter } from "next/navigation";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
-export default function Comments({ params, comments }) {
+export default function Comments({ questionId }) {
   // const { data: session } = useSession();
-  const router = useRouter();
-  // const { id } = params;
-  // const { data, error, isLoading } = useSWR(`/api/comment/${id}`, fetcher);
+  // const router = useRouter();
 
-  // if (error) return <div>{`Failed to load :(`}</div>;
-  // if (isLoading) return <div>Loading Question...</div>;
+  const { id } = questionId;
+  const {
+    data: comments,
+    error,
+    isLoading,
+  } = useSWR(`/api/comment/${id}`, fetcher);
+  console.log("What is inside of the data", comments);
+  if (error) return <div>{`Failed to load :(`}</div>;
+  if (isLoading) return <div>Loading Question...</div>;
 
   return (
     <div>
       <h2>Comments</h2>
-      {/* {comments.map((comment) => (
+      {comments.map((comment) => (
         <div key={comment._id}>
           <p>{comment.content}</p>
           <p>Author: {comment.author.name}</p>
         </div>
-      ))} */}
+      ))}
     </div>
   );
 }

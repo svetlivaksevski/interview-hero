@@ -30,7 +30,8 @@ export default function QuestionPage({ params }) {
     }
   }
 
-  console.log(data);
+  const onlyDate = data.created.substring(0, 10);
+
   return (
     <>
       <Header />
@@ -39,13 +40,16 @@ export default function QuestionPage({ params }) {
         <p>{data.question}</p>
         <h2>Your answer:</h2>
         <p>{data.answer}</p>
+        <h3>Created: {onlyDate}</h3>
         <button onClick={signIn}>SignIn</button>
         <button onClick={signOut}>SignOut</button>
-        {session && (
+        {session?.user.userId === data?.userId ? (
           <>
             <Link href={`/question/${id}/edit`}>Edit</Link>
             <button onClick={deleteQuestion}>Delete</button>
           </>
+        ) : (
+          <p></p>
         )}
       </div>
 
