@@ -36,7 +36,7 @@ export default function Profile() {
       <Header />
       <img src={session.user.image} className="profilepicture" alt="Profile" />
       <h1>You signed up as {session.user.name}</h1>
-      <p>Questions you added: {questionsAddedbyYou?.length || 0}</p>
+      <p>Questions you added so far: {questionsAddedbyYou?.length || 0}</p>
       <button onClick={() => signOut()}>Sign Out</button>
       <Navigation />
     </>
