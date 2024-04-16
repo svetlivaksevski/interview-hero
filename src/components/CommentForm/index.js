@@ -13,7 +13,6 @@ export default function CommentForm({ questionId }) {
     const formData = new FormData(event.target);
     const comment = Object.fromEntries(formData);
     const commentWithUser = { ...comment, userId: session.user.userId };
-
     AddComment(commentWithUser);
   };
   async function AddComment(entryData) {

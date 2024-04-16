@@ -63,7 +63,6 @@ export default function QuestionsForm({
           cols="30"
           defaultValue={defaultData?.answer}
         />
-        {/* <input type="hidden" name="userId" value={userName.user.userId} /> */}
         <button type="submit">Submit</button>
       </form>
     </div>
