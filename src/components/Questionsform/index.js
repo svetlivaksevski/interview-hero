@@ -1,18 +1,47 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { signIn, useSession, signOut } from "next-auth/react";
+
 export default function QuestionsForm({
   onSubmit,
-  loadingAddQuestion,
+
   defaultData,
   formName,
-  setLoadingAddQuestion,
+  userName,
 }) {
+  const router = useRouter();
+  const session = useSession();
+  const [loadingAddQuestion, setLoadingAddQuestion] = useState(false);
+
   async function handleSubmit(event) {
     event.preventDefault();
     setLoadingAddQuestion(true);
     const formData = new FormData(event.target);
     const entryData = Object.fromEntries(formData);
-    onSubmit(entryData);
+    const questionWithUser = { ...entryData, userId: session.data.user.userId };
+    AddQuestion(questionWithUser);
   }
 
+  async function AddQuestion(entryData) {
+    const response = await fetch("/api/question", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(entryData),
+    });
+    if (!response.ok) {
+      alert("Ooops, something went wrong. Your question was not added :(");
+      console.log(error);
+    }
+    if (response.ok) {
+      setLoadingAddQuestion(false);
+      router.push("/question");
+      alert("Yes! You have added this question. See the question down below!");
+    }
+  }
   return (
     <div>
       <form className="form" aria-labelledby="Form" onSubmit={handleSubmit}>
@@ -34,7 +63,7 @@ export default function QuestionsForm({
           cols="30"
           defaultValue={defaultData?.answer}
         />
-
+        {/* <input type="hidden" name="userId" value={userName.user.userId} /> */}
         <button type="submit">Submit</button>
       </form>
     </div>

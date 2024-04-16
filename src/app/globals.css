@@ -25,6 +25,8 @@ main {
 
 h2 {
   color: #3aafa9;
+  font-family: "Lora", serif;
+  font-style: italic;
 }
 
 @media (prefers-color-scheme: dark) {

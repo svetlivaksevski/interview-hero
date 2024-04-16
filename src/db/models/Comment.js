@@ -3,7 +3,9 @@ import mongoose from "mongoose";
 
 const { Schema } = mongoose;
 const commentSchema = new Schema({
-  userId: { type: Schema.Types.ObjectId, ref: "User" },
+  userName: { type: String },
+  profileImage: { type: String },
+  questionId: { type: Schema.Types.ObjectId, ref: "Question" },
   created: { type: Date, default: Date.now },
   comment: { type: String, required: true },
 });

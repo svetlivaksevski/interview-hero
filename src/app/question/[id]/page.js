@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import useSWR from "swr";
 import Navigation from "../../../components/Navigation";
@@ -10,7 +10,7 @@ import CommentForm from "@/components/CommentForm";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
-export default function QuestionPage({ params }) {
+export default function QuestionPage({ params, questionId }) {
   const { data: session } = useSession();
   const router = useRouter();
   const { id } = params;
@@ -20,7 +20,7 @@ export default function QuestionPage({ params }) {
   if (isLoading) return <div>Loading Question...</div>;
 
   async function deleteQuestion() {
-    const response = await fetch(`/api/question/${id}`, {
+    const response = await fetch(`/api/question/${questionId}`, {
       method: "DELETE",
     });
     if (response.ok) {
@@ -30,28 +30,42 @@ export default function QuestionPage({ params }) {
     }
   }
 
-  console.log(data);
+  const onlyDate = data.createdAt.substring(0, 10);
+
   return (
     <>
       <Header />
-      <div>
-        <h2>Your question:</h2>
-        <p>{data.question}</p>
-        <h2>Your answer:</h2>
-        <p>{data.answer}</p>
-        <button onClick={signIn}>SignIn</button>
-        <button onClick={signOut}>SignOut</button>
-        {session && (
-          <>
-            <Link href={`/question/${id}/edit`}>Edit</Link>
-            <button onClick={deleteQuestion}>Delete</button>
-          </>
-        )}
+      <div className="container-questions">
+        <div className="questions-data">
+          <h2>Your question:</h2>
+          <p>{data.question}</p>
+          <h2>Your answer:</h2>
+          <p>{data.answer}</p>
+          <div className="dots"></div>
+          <div className="user-info">
+            <p>Posted by {data.userName}</p>
+
+            <p>Created: {onlyDate}</p>
+          </div>
+          <div className="buttons-question">
+            {session?.user.userId === data?.userId ? (
+              <>
+                <Link href={`/question/${id}/edit`} className="buttons">
+                  Edit
+                </Link>
+                <button onClick={deleteQuestion} className="buttons">
+                  Delete
+                </button>
+              </>
+            ) : (
+              <p></p>
+            )}
+          </div>
+        </div>
+
+        <Comments questionId={id} />
+        <CommentForm questionId={id} />
       </div>
-
-      <Comments questionId={id} comments={data?.comments || []} />
-      <CommentForm questionId={id} comments={data?.comments || []} />
-
       <Navigation />
     </>
   );

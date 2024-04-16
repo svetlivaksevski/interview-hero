@@ -9,48 +9,48 @@ export default function CommentForm({ questionId }) {
   const [comment, setComment] = useState("");
   const router = useRouter();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = (event) => {
     const formData = new FormData(event.target);
-    const comment = formData.get("comment");
-    await AddComment(comment);
-    // const body = {
-    //   place: place,
-    //   newComment: {
-    //     name: name,
-    //     comment: comment,
-    //   },
-    // }
-    console.log("comment", comment);
-
-    async function AddComment(entryData) {
-      console.log("data", entryData);
-      try {
-        const response = await fetch(`/api/comment/${questionId}`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(entryData),
-        });
-        if (!response.ok) {
-          throw new Error("Error submitting comment");
-        }
-        setComment("");
-      } catch (error) {
-        console.error(error);
-      }
-    }
+    const comment = Object.fromEntries(formData);
+    AddComment(comment);
   };
+
+  async function AddComment(entryData) {
+    try {
+      const response = await fetch(`/api/comment/${questionId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(entryData),
+      });
+
+      if (response.ok) {
+        router.push(`/question/${questionId}`);
+      }
+
+      if (!response.ok) {
+        throw new Error("Error submitting comment");
+      }
+      setComment("");
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="comment-form">
       <textarea
         name="comment"
         type="text"
-        placeholder="Enter your comment"
+        placeholder="Enter your comment..."
+        className="comment-section"
         required
       />
-      <button type="submit">Submit</button>
+
+      <button type="submit" className="buttons">
+        Submit
+      </button>
     </form>
   );
 }
