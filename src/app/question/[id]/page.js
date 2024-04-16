@@ -51,7 +51,7 @@ export default function QuestionPage({ params, questionId }) {
             {session?.user.userId === data?.userId ? (
               <>
                 <Link href={`/question/${id}/edit`} className="buttons">
-                  Edit
+                  Edit question
                 </Link>
                 <button onClick={deleteQuestion} className="buttons">
                   Delete
