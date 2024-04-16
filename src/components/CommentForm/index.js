@@ -8,13 +8,13 @@ export default function CommentForm({ questionId }) {
   const { data: session } = useSession();
   const [comment, setComment] = useState("");
   const router = useRouter();
-
   const handleSubmit = (event) => {
     const formData = new FormData(event.target);
     const comment = Object.fromEntries(formData);
-    AddComment(comment);
-  };
+    const commentWithUser = { ...comment, userId: session.user.userId };
 
+    AddComment(commentWithUser);
+  };
   async function AddComment(entryData) {
     try {
       const response = await fetch(`/api/comment/${questionId}`, {

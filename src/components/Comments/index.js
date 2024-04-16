@@ -2,12 +2,12 @@
 
 import useSWR from "swr";
 import { useRouter } from "next/navigation";
-// import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
 export default function Comments({ params, questionId }) {
-  // const { data: session } = useSession();
+  const { data: session } = useSession();
   const router = useRouter();
   // console.log("result", questionId);
   const id = params;
@@ -21,7 +21,6 @@ export default function Comments({ params, questionId }) {
   if (isLoading) return <div>Loading Question...</div>;
 
   async function deleteComment(id) {
-    console.log("IDDDD", id);
     const response = await fetch(`/api/comment/${id}`, {
       method: "DELETE",
     });
@@ -56,12 +55,16 @@ export default function Comments({ params, questionId }) {
             </div>
             <p>{comment.comment}</p>
             <div className="dots"></div>
-            <button
-              onClick={() => deleteComment(comment._id)}
-              className="buttons"
-            >
-              Delete
-            </button>
+            {session?.user.userId === comment?.userId ? (
+              <button
+                onClick={() => deleteComment(comment._id)}
+                className="buttons"
+              >
+                Delete
+              </button>
+            ) : (
+              <p></p>
+            )}
           </div>
         ))}
       </div>
