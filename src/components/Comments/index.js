@@ -32,6 +32,22 @@ export default function Comments({ params, questionId }) {
     }
   }
 
+  async function editComment(id) {
+    const response = await fetch(`/api/comment/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(id),
+    });
+
+    if (response.ok) {
+      mutate();
+    } else {
+      console.error(response.status);
+    }
+  }
+
   let onlyDate;
 
   comments.forEach((date) => {
@@ -52,18 +68,40 @@ export default function Comments({ params, questionId }) {
               />
               <div className="p-comment">
                 <p className="author">{comment.userName}</p>
-                <p className="add-comment">added on {onlyDate}</p>
+                <p className="add-comment">posted at: {onlyDate}</p>
               </div>
             </div>
             <p>{comment.comment}</p>
             <div className="dots"></div>
             {session?.user.userId === comment?.userId ? (
-              <button
-                onClick={() => deleteComment(comment._id)}
-                className="buttons"
-              >
-                Delete
-              </button>
+              <>
+                <button
+                  onClick={() => editComment(comment._id)}
+                  className="buttons"
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={() => deleteComment(comment._id)}
+                  className="buttons"
+                >
+                  Delete
+                </button>
+
+                {editComment === comment._id ? (
+                  <div>
+                    <textarea
+                      value={editedComment}
+                      onChange={(e) => setEditedComment(e.target.value)}
+                    />
+                    <button onClick={() => editComment(comment._id)}>
+                      Save
+                    </button>
+                  </div>
+                ) : (
+                  <p>{comment.comment}</p>
+                )}
+              </>
             ) : (
               <p></p>
             )}
