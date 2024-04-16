@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { mutate } from "swr";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
@@ -26,7 +27,7 @@ export default function CommentForm({ questionId }) {
       });
 
       if (response.ok) {
-        router.push(`/question/${questionId}`);
+        mutate(`/question/${questionId}`);
       }
 
       if (!response.ok) {

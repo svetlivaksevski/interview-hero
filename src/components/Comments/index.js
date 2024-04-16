@@ -9,27 +9,29 @@ const fetcher = (url) => fetch(url).then((r) => r.json());
 export default function Comments({ params, questionId }) {
   const { data: session } = useSession();
   const router = useRouter();
-  // console.log("result", questionId);
+
   const id = params;
   const {
     data: comments,
     error,
     isLoading,
+    mutate,
   } = useSWR(`/api/comment/${questionId}`, fetcher);
 
   if (error) return <div>{`Failed to load :(`}</div>;
-  if (isLoading) return <div>Loading Question...</div>;
+  if (!comments) return;
 
   async function deleteComment(id) {
     const response = await fetch(`/api/comment/${id}`, {
       method: "DELETE",
     });
     if (response.ok) {
-      router.push(`/question/${questionId}`);
+      mutate();
     } else {
       console.error(response.status);
     }
   }
+
   let onlyDate;
 
   comments.forEach((date) => {

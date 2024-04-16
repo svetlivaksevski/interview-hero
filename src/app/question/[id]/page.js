@@ -17,10 +17,10 @@ export default function QuestionPage({ params, questionId }) {
   const { data, error, isLoading } = useSWR(`/api/question/${id}`, fetcher);
 
   if (error) return <div>{`Failed to load :(`}</div>;
-  if (isLoading) return <div>Loading Question...</div>;
+  if (!data) return;
 
   async function deleteQuestion() {
-    const response = await fetch(`/api/question/${questionId}`, {
+    const response = await fetch(`/api/question/${id}`, {
       method: "DELETE",
     });
     if (response.ok) {
