@@ -1,6 +1,7 @@
 "use client";
 
 import useSWR from "swr";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
@@ -9,6 +10,8 @@ const fetcher = (url) => fetch(url).then((r) => r.json());
 export default function Comments({ params, questionId }) {
   const { data: session } = useSession();
   const router = useRouter();
+  const [editedCommentId, setEditedCommentId] = useState(null);
+  const [commentText, setCommentText] = useState("");
 
   const id = params;
   const {
@@ -32,16 +35,22 @@ export default function Comments({ params, questionId }) {
     }
   }
 
-  async function editComment(id) {
+  async function handleSaveEdit(id) {
+    if (!editedCommentId) return;
+
     const response = await fetch(`/api/comment/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(id),
+      body: JSON.stringify({
+        comment: commentText,
+      }),
     });
 
     if (response.ok) {
+      setEditedCommentId(null);
+      setCommentText("");
       mutate();
     } else {
       console.error(response.status);
@@ -54,6 +63,7 @@ export default function Comments({ params, questionId }) {
     const createdDate = date.created;
     onlyDate = createdDate.substring(0, 10);
   });
+
   return (
     <div>
       <div className="comments-container">
@@ -71,13 +81,38 @@ export default function Comments({ params, questionId }) {
                 <p className="add-comment">posted at: {onlyDate}</p>
               </div>
             </div>
-            <p>{comment.comment}</p>
+            <p>
+              {editedCommentId === comment._id ? (
+                <textarea
+                  defaultValue={comment.comment}
+                  onChange={(e) => setCommentText(e.target.value)}
+                  maxLength={250}
+                  minLength={2}
+                />
+              ) : (
+                comment.comment
+              )}
+              {editedCommentId === comment._id && (
+                <button
+                  onClick={() => handleSaveEdit(comment._id)}
+                  className="buttons"
+                  disabled={commentText.length <= 0}
+                >
+                  Save
+                </button>
+              )}
+            </p>
             <div className="dots"></div>
             {session?.user.userId === comment?.userId ? (
               <>
                 <button
-                  onClick={() => editComment(comment._id)}
-                  className="buttons"
+                  onClick={() => setEditedCommentId(comment._id)}
+                  className={
+                    editedCommentId === comment._id
+                      ? "buttons disabled"
+                      : "buttons"
+                  }
+                  disabled={editedCommentId === comment._id}
                 >
                   Edit
                 </button>
@@ -87,20 +122,6 @@ export default function Comments({ params, questionId }) {
                 >
                   Delete
                 </button>
-
-                {editComment === comment._id ? (
-                  <div>
-                    <textarea
-                      value={editedComment}
-                      onChange={(e) => setEditedComment(e.target.value)}
-                    />
-                    <button onClick={() => editComment(comment._id)}>
-                      Save
-                    </button>
-                  </div>
-                ) : (
-                  <p>{comment.comment}</p>
-                )}
               </>
             ) : (
               <p></p>

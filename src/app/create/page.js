@@ -1,5 +1,3 @@
-// "use client";
-
 import Navigation from "../../components/Navigation";
 import Header from "../../components/Header";
 import QuestionsForm from "../../components/Questionsform";
@@ -11,7 +9,7 @@ export default async function CreateEntryPage() {
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    return <SignInPage pagetext={"see your personal page"} />;
+    return <SignInPage />;
   }
 
   return (

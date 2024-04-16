@@ -41,7 +41,7 @@ export async function PUT(req, { params }) {
     const { id } = params;
     const body = await req.json();
 
-    await Question.findByIdAndUpdate(id, {
+    await Comment.findByIdAndUpdate(id, {
       $set: body,
     });
     return NextResponse.json({ status: 200 });
