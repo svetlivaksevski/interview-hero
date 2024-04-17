@@ -1,7 +1,5 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import SignInPage from "@/components/SignInPage";
 
@@ -39,7 +37,11 @@ export default function QuestionsForm({
           />
           <label htmlFor="select">Select question category:</label>
           <div className="custom-select">
-            <select id="category" name="category">
+            <select
+              id="category"
+              name="category"
+              defaultValue={defaultData?.category}
+            >
               <option value="No category assigned">
                 -- Select category --
               </option>
@@ -59,7 +61,11 @@ export default function QuestionsForm({
           </div>
           <label htmlFor="select">Select Difficulty Level:</label>
           <div className="custom-select">
-            <select id="difficulty" name="difficulty">
+            <select
+              id="difficulty"
+              name="difficulty"
+              defaultValue={defaultData?.difficulty}
+            >
               <option value="No category assigned">
                 -- Select category --
               </option>
