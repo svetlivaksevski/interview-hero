@@ -9,10 +9,8 @@ const fetcher = (url) => fetch(url).then((r) => r.json());
 
 export default function QuestionPage() {
   const [searchTerm, setSearchTerm] = useState("");
-  // const [showMore, setShowMore] = useState(false);
   const [displayCount, setDisplayCount] = useState(10);
-  // const [selectedCategory, setSelectedCategory] = useState(null);
-  // const [filteredQuestion, setFilteredQuestion] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -33,33 +31,38 @@ export default function QuestionPage() {
       })
     : [];
 
+  const filteredCategoryQuestions = selectedCategory
+    ? filteredQuestions.filter(
+        (question) => question.category === selectedCategory
+      )
+    : filteredQuestions;
+
   const handleShowMore = () => {
     setDisplayCount(displayCount + 10);
   };
 
-  // const handleCategorySelect = (category) => {
-  //   setSelectedCategory(category);
+  const handleCategorySelect = (category) => {
+    setSelectedCategory(category);
+  };
 
-  //   const filteredQuestions = data.filter(
-  //     (question) => question.category === category
-  //   );
-  //   setFilteredQuestion(filteredQuestions);
-  //   console.log(filteredQuestions);
-  // };
+  const handleShowAll = () => {
+    setSelectedCategory(null);
+  };
 
   return (
     <>
       <Header />
       <main>
         <div className="container">
-          {/* <div name="category">
+          <div name="category">
+            <div onClick={() => handleCategorySelect(null)}>All</div>{" "}
             <div
               onClick={() => handleCategorySelect("Behavioral & Cultural Fit")}
             >
               <p>Behavioral & Cultural Fit</p>
             </div>
             <div onClick={() => handleCategorySelect("Technical")}>
-              <p> Technical</p>
+              <p>Technical</p>
             </div>
             <div
               onClick={() => handleCategorySelect("Compensation and Benefits")}
@@ -71,13 +74,13 @@ export default function QuestionPage() {
                 handleCategorySelect("Professional Development and Growth")
               }
             >
-              <p> Professional Development and Growth</p>
+              <p>Professional Development and Growth</p>
             </div>
             <div onClick={() => handleCategorySelect("Problem-Solving")}>
               <p>Problem-Solving</p>
             </div>
             <div onClick={() => handleCategorySelect("Other")}>Other</div>
-          </div> */}
+          </div>
           <form className="search-bar" onSubmit={(e) => e.preventDefault()}>
             <input
               type="text"
@@ -86,7 +89,7 @@ export default function QuestionPage() {
               placeholder="Search questions..."
             />
             <h2>Search Results</h2>
-            {filteredQuestions.length} available results
+            {filteredCategoryQuestions.length} available results
           </form>
           {error ? (
             <div>Failed to load</div>
@@ -94,9 +97,9 @@ export default function QuestionPage() {
             <div>Loading questions...</div>
           ) : (
             <div>
-              {filteredQuestions.length > 0 ? (
+              {filteredCategoryQuestions.length > 0 ? (
                 <>
-                  {filteredQuestions.slice(0, displayCount).map((q) => (
+                  {filteredCategoryQuestions.slice(0, displayCount).map((q) => (
                     <div className="container-questions-list" key={q._id}>
                       <h2>Your question:</h2>
                       <p>{q.question}</p>
@@ -106,7 +109,7 @@ export default function QuestionPage() {
                       </a>
                     </div>
                   ))}
-                  {filteredQuestions.length > displayCount && (
+                  {filteredCategoryQuestions.length > displayCount && (
                     <span className="showmore" onClick={handleShowMore}>
                       Show more
                     </span>
