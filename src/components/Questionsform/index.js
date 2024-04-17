@@ -4,7 +4,12 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
-export default function QuestionsForm({ defaultData, onSubmit }) {
+export default function QuestionsForm({
+  defaultData,
+  onSubmit,
+  userName,
+  formName,
+}) {
   const router = useRouter();
   const session = useSession();
   const [loadingAddQuestion, setLoadingAddQuestion] = useState(false);
