@@ -39,18 +39,24 @@ export default function CommentForm({ questionId }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="comment-form">
-      <textarea
-        name="comment"
-        type="text"
-        placeholder="Enter your comment..."
-        className="comment-section"
-        required
-      />
+    <>
+      {session?.user.userId ? (
+        <form onSubmit={handleSubmit} className="comment-form">
+          <textarea
+            name="comment"
+            type="text"
+            placeholder="Enter your comment..."
+            className="comment-section"
+            required
+          />
 
-      <button type="submit" className="buttons">
-        Submit
-      </button>
-    </form>
+          <button type="submit" className="buttons">
+            Submit
+          </button>
+        </form>
+      ) : (
+        <p>To leave a comment, please sign up first.</p>
+      )}
+    </>
   );
 }
