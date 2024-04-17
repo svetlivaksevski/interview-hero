@@ -76,7 +76,7 @@ export default function QuestionsForm({ defaultData }) {
         />
         <label htmlFor="select">Select question category:</label>
         <div className="custom-select">
-          <select id="select" name="select">
+          <select id="category" name="category">
             <option value="No category assigned">-- Select category --</option>
             <option value="Behavioral & Cultural Fit">
               Behavioral & Cultural Fit
@@ -90,6 +90,15 @@ export default function QuestionsForm({ defaultData }) {
             </option>
             <option value="Problem-Solving">Problem-Solving</option>
             <option value="Other">Other</option>
+          </select>
+        </div>
+        <label htmlFor="select">Select Difficulty Level:</label>
+        <div className="custom-select">
+          <select id="difficulty" name="difficulty">
+            <option value="No category assigned">-- Select category --</option>
+            <option value="Easy">Easy</option>
+            <option value="Medium">Medium</option>
+            <option value="Hard">Hard</option>
           </select>
         </div>
         <button type="submit">Submit</button>

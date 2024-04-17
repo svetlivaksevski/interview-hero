@@ -41,6 +41,10 @@ export default function QuestionPage({ params, questionId }) {
           <p>{data.question}</p>
           <h2>Your answer:</h2>
           <p>{data.answer}</p>
+          <h3>Question category:</h3>
+          <p>{data.category}</p>
+          <h3>How challenging was this question to answer?</h3>
+          <p>{data.difficulty}</p>
           <div className="dots"></div>
           <div className="user-info">
             <p>Posted by {data.userName}</p>
