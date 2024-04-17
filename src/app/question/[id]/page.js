@@ -10,11 +10,11 @@ import CommentForm from "@/components/CommentForm";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
-export default function QuestionPage({ params, questionId }) {
+export default function QuestionPage({ params }) {
   const { data: session } = useSession();
   const router = useRouter();
   const { id } = params;
-  const { data, error, isLoading } = useSWR(`/api/question/${id}`, fetcher);
+  const { data, error } = useSWR(`/api/question/${id}`, fetcher);
 
   if (error) return <div>{`Failed to load :(`}</div>;
   if (!data) return;
@@ -31,7 +31,7 @@ export default function QuestionPage({ params, questionId }) {
   }
 
   const onlyDate = data.createdAt.substring(0, 10);
-  console.log("data", data);
+
   return (
     <>
       <Header />
@@ -41,6 +41,10 @@ export default function QuestionPage({ params, questionId }) {
           <p>{data.question}</p>
           <h2>Your answer:</h2>
           <p>{data.answer}</p>
+          <h3>Question category:</h3>
+          <p>{data.category}</p>
+          <h3>How challenging was this question to answer?</h3>
+          <p>{data.difficulty}</p>
           <div className="dots"></div>
           <div className="user-info">
             <p>Posted by {data.userName}</p>
