@@ -31,7 +31,7 @@ export default function QuestionPage({ params, questionId }) {
   }
 
   const onlyDate = data.createdAt.substring(0, 10);
-
+  console.log("data", data);
   return (
     <>
       <Header />
