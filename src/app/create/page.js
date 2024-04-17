@@ -4,9 +4,6 @@ import Navigation from "../../components/Navigation";
 import Header from "../../components/Header";
 import QuestionsForm from "../../components/Questionsform";
 import { useSession } from "next-auth/react";
-// import SignInPage from "@/components/SignInPage";
-// import { getServerSession } from "next-auth/next";
-// import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -24,7 +21,10 @@ export default function CreateEntryPage() {
     const formData = new FormData(event.target);
     const entryData = Object.fromEntries(formData);
 
-    if (entryData.category === "No category assigned") {
+    if (
+      entryData.category === "No category assigned" ||
+      entryData.difficulty === "No category assigned"
+    ) {
       setLoadingAddQuestion(false);
       setErrorMessage("Please select a category.");
       return;

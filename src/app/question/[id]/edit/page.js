@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import Link from "next/link";
 import useSWR from "swr";
 import QuestionsForm from "../../../../components/Questionsform";
 import Navigation from "@/components/Navigation";
@@ -31,7 +30,10 @@ export default function EditPage({ params }) {
     const formData = new FormData(event.target);
     const entryData = Object.fromEntries(formData);
 
-    if (entryData.category === "No category assigned") {
+    if (
+      entryData.category === "No category assigned" ||
+      entryData.difficulty === "No category assigned"
+    ) {
       setLoadingAddQuestion(false);
       setErrorMessage("Please select a category.");
       return;
@@ -66,10 +68,6 @@ export default function EditPage({ params }) {
   return (
     <>
       <Header />
-      <h2>Edit Question</h2>
-      <Link href={`/question/${id}`}>
-        <p>back</p>
-      </Link>
       <QuestionsForm
         onSubmit={handleSubmit}
         formName={"edit-question"}
