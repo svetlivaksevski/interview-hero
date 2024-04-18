@@ -7,6 +7,7 @@ const commentSchema = new Schema({
   profileImage: { type: String },
   questionId: { type: Schema.Types.ObjectId, ref: "Question" },
   userId: { type: Schema.Types.ObjectId, ref: "User" },
+  likes: { type: Number },
   created: { type: Date, default: Date.now },
   comment: { type: String, required: true },
 });
