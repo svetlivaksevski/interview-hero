@@ -32,6 +32,21 @@ export default function QuestionPage({ params }) {
 
   const onlyDate = data.createdAt.substring(0, 10);
 
+  const getCategoryColor = (data) => {
+    switch (data.difficulty) {
+      case "Easy":
+        return "#A1DE93";
+      case "Medium":
+        return "#F7F48B";
+      case "Hard":
+        return "#F47C7C";
+      default:
+        return "white";
+    }
+  };
+
+  const color = getCategoryColor(data);
+
   return (
     <>
       <Header />
@@ -44,7 +59,7 @@ export default function QuestionPage({ params }) {
           <h3>Question category:</h3>
           <p>{data.category}</p>
           <h3>How challenging was this question to answer?</h3>
-          <p>{data.difficulty}</p>
+          <p style={{ backgroundColor: color }}>{data.difficulty}</p>
           <div className="dots"></div>
           <div className="user-info">
             <p>Posted by {data.userName}</p>

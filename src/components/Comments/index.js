@@ -58,9 +58,7 @@ export default function Comments({ params, questionId }) {
     }
   }
 
-  function handleLike() {
-    setLikes(likes + 1);
-  }
+  // setLikes(likes + 1);
 
   let onlyDate;
 
@@ -110,9 +108,9 @@ export default function Comments({ params, questionId }) {
             <div className="dots"></div>
             {session?.user.userId === comment?.userId ? (
               <>
-                <button className="buttons" onClick={handleLike}>
-                  Like {likes}
-                </button>
+                {/* <button className="buttons" onClick={handleLike}>
+                  Like
+                </button> */}
                 <button
                   onClick={() => setEditedCommentId(comment._id)}
                   className={
