@@ -45,12 +45,17 @@ export default function QuestionPage() {
     setSelectedCategory(category);
   };
 
+  console.log(selectedCategory);
   return (
     <>
       <Header />
       <main>
         <div className="container">
-          <div name="category">
+          <div
+            name="category"
+            className="
+          container-category"
+          >
             <div onClick={() => handleCategorySelect(null)}>All</div>{" "}
             <div
               onClick={() => handleCategorySelect("Behavioral & Cultural Fit")}
@@ -84,6 +89,10 @@ export default function QuestionPage() {
               onChange={handleSearchChange}
               placeholder="Search questions..."
             />
+            <p>
+              You are currently at the category:
+              {selectedCategory !== null ? selectedCategory : "All questions"}
+            </p>
             <h2>Search Results</h2>
             {filteredCategoryQuestions.length} available results
           </form>
@@ -94,7 +103,7 @@ export default function QuestionPage() {
           ) : (
             <div>
               {filteredCategoryQuestions.length > 0 ? (
-                <>
+                <div className="questions-container">
                   {filteredCategoryQuestions.slice(0, displayCount).map((q) => (
                     <div className="container-questions-list" key={q._id}>
                       <h2>Your question:</h2>
@@ -110,14 +119,16 @@ export default function QuestionPage() {
                       Show more
                     </span>
                   )}
-                </>
+                </div>
               ) : (
                 <>
                   {(filteredQuestions.length === 0 ? (
-                    <h2>No result found for {searchTerm}</h2>
+                    <h2>There were no results found for {searchTerm}</h2>
                   ) : null) ??
                     (filteredCategoryQuestions.length === 0 && (
-                      <h2> There is no questions added </h2>
+                      <h2>
+                        No questions have been added to this category yet.
+                      </h2>
                     ))}
                 </>
               )}
