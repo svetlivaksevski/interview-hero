@@ -232,3 +232,18 @@ input {
   display: flex;
   flex-direction: column;
 }
+
+.container-category {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: center;
+}
+
+.questions-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+}
