@@ -45,10 +45,6 @@ export default function QuestionPage() {
     setSelectedCategory(category);
   };
 
-  const handleShowAll = () => {
-    setSelectedCategory(null);
-  };
-
   return (
     <>
       <Header />
@@ -116,7 +112,14 @@ export default function QuestionPage() {
                   )}
                 </>
               ) : (
-                <h2>No results found for &quot;{searchTerm}&quot;</h2>
+                <>
+                  {(filteredQuestions.length === 0 ? (
+                    <h2>No result found for {searchTerm}</h2>
+                  ) : null) ??
+                    (filteredCategoryQuestions.length === 0 && (
+                      <h2> There is no questions added </h2>
+                    ))}
+                </>
               )}
             </div>
           )}

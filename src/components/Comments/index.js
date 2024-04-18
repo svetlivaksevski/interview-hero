@@ -12,6 +12,7 @@ export default function Comments({ params, questionId }) {
   const router = useRouter();
   const [editedCommentId, setEditedCommentId] = useState(null);
   const [commentText, setCommentText] = useState("");
+  const [likes, setLikes] = useState(0);
 
   const id = params;
   const {
@@ -57,6 +58,8 @@ export default function Comments({ params, questionId }) {
     }
   }
 
+  // setLikes(likes + 1);
+
   let onlyDate;
 
   comments.forEach((date) => {
@@ -96,7 +99,7 @@ export default function Comments({ params, questionId }) {
                 <button
                   onClick={() => handleSaveEdit(comment._id)}
                   className="buttons"
-                  disabled={commentText.length <= 0}
+                  disabled={commentText.trim().length === 0}
                 >
                   Save
                 </button>
@@ -105,6 +108,9 @@ export default function Comments({ params, questionId }) {
             <div className="dots"></div>
             {session?.user.userId === comment?.userId ? (
               <>
+                {/* <button className="buttons" onClick={handleLike}>
+                  Like
+                </button> */}
                 <button
                   onClick={() => setEditedCommentId(comment._id)}
                   className={
