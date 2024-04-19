@@ -9,7 +9,7 @@ const commentSchema = new Schema({
   userId: { type: Schema.Types.ObjectId, ref: "User" },
   created: { type: Date, default: Date.now },
   comment: { type: String, required: true },
-  likes: [{ type: Schema.Types.ObjectId, ref: "User" }],
+  likedByUserId: [{ type: Schema.Types.ObjectId, ref: "User" }],
 });
 
 const Comment =

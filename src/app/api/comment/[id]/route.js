@@ -35,6 +35,36 @@ export async function POST(request, { params }) {
   }
 }
 
+export async function PATCH(request, { params }) {
+  await dbConnect();
+  const session = await getServerSession(authOptions);
+
+  const commentId = params.id;
+  const userId = session.user.userId;
+
+  await Comment.findById(commentId)
+    .then((post) => {
+      const index = post.likedByUserId.findIndex((id) => id.equals(userId));
+      if (index === -1) {
+        return Comment.updateOne(
+          { _id: commentId },
+          { $push: { likedByUserId: userId } }
+        );
+      } else {
+        return Comment.updateOne(
+          { _id: commentId },
+          { $pull: { likedByUserId: userId } }
+        );
+      }
+    })
+    .then((result) => {
+      console.log("Toggle like successful:", result);
+    })
+    .catch((err) => {
+      console.error("Error toggling like:", err);
+    });
+}
+
 export async function PUT(req, { params }) {
   try {
     await dbConnect();

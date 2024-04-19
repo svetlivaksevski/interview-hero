@@ -45,7 +45,6 @@ export default function QuestionPage() {
     setSelectedCategory(category);
   };
 
-  console.log(selectedCategory);
   return (
     <>
       <Header />
