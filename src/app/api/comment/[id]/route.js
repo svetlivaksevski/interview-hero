@@ -1,4 +1,4 @@
-import { NextResponse, userAgent } from "next/server";
+import { NextResponse } from "next/server";
 import Comment from "@/db/models/Comment";
 import dbConnect from "@/db/connect";
 import { getServerSession } from "next-auth";
