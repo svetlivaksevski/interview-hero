@@ -1,27 +1,15 @@
 "use client";
 
-import useSWR from "swr";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-
-const fetcher = (url) => fetch(url).then((r) => r.json());
 
 export default function Comments({ params, questionId, mutate }) {
   const { data: session } = useSession();
-  const router = useRouter();
+
   const [editedCommentId, setEditedCommentId] = useState(null);
   const [commentText, setCommentText] = useState("");
-  const [date, setDate] = useState("");
-  const [amountLikes, setAmountLikes] = useState(0);
-  const [isLiked, setIsLiked] = useState(false);
   const [comments, setComments] = useState([]);
   const id = params;
-  // const {
-  //   data: comments,
-  //   error,
-  //   isLoading,
-  // } = useSWR(`/api/comment/${questionId}`, fetcher);
 
   useEffect(() => {
     const fetchComments = async () => {
@@ -32,7 +20,6 @@ export default function Comments({ params, questionId, mutate }) {
     fetchComments();
   }, [comments, questionId]);
 
-  // if (error) return <div>{`Failed to load :(`}</div>;
   if (!comments) return;
 
   async function deleteComment(id) {
