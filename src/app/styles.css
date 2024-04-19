@@ -1,3 +1,5 @@
+@import url("../app/question/questionStyling.css");
+
 .navigation {
   display: flex;
   flex-direction: row;
@@ -167,12 +169,6 @@ input {
   margin-top: 20px;
   border-top: 2px dotted #2b7a78;
   flex-wrap: wrap;
-}
-
-.user-info {
-  margin-top: 10px;
-  color: #283a40;
-  font-size: 12px;
 }
 
 .comments-container {

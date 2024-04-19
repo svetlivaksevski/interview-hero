@@ -16,7 +16,11 @@ export async function POST(request, response) {
   try {
     const entryData = await request.json();
 
-    await Question.create({ ...entryData, userName: session.user.name });
+    await Question.create({
+      ...entryData,
+      userName: session.user.name,
+      profileImage: session.user.image,
+    });
 
     return NextResponse.json({ entryData }, { status: 201 });
   } catch (e) {
