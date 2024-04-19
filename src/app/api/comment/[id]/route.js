@@ -38,11 +38,10 @@ export async function POST(request, { params }) {
 export async function PATCH(request, response) {
   await dbConnect();
   const session = await getServerSession(authOptions);
-  console.log("request.body", request.body);
 
   const { commentId } = await request.json();
   const userId = session.user.userId;
-  console.log("commentId", commentId);
+
   try {
     const updatedComments = await Comment.findById(commentId).then((post) => {
       const index = post.likedByUserId.findIndex((id) => id.equals(userId));
