@@ -35,34 +35,35 @@ export async function POST(request, { params }) {
   }
 }
 
-export async function PATCH(request, { params }) {
+export async function PATCH(request, response) {
   await dbConnect();
   const session = await getServerSession(authOptions);
+  console.log("request.body", request.body);
 
-  const commentId = params.id;
+  const { commentId } = await request.json();
   const userId = session.user.userId;
-
-  await Comment.findById(commentId)
-    .then((post) => {
+  console.log("commentId", commentId);
+  try {
+    const updatedComments = await Comment.findById(commentId).then((post) => {
       const index = post.likedByUserId.findIndex((id) => id.equals(userId));
       if (index === -1) {
         return Comment.updateOne(
           { _id: commentId },
-          { $push: { likedByUserId: userId } }
+          { $push: { likedByUserId: userId } },
+          { new: true }
         );
       } else {
         return Comment.updateOne(
           { _id: commentId },
-          { $pull: { likedByUserId: userId } }
+          { $pull: { likedByUserId: userId } },
+          { new: true }
         );
       }
-    })
-    .then((result) => {
-      console.log("Toggle like successful:", result);
-    })
-    .catch((err) => {
-      console.error("Error toggling like:", err);
     });
+    return NextResponse.json(updatedComments);
+  } catch (e) {
+    return NextResponse.status(400).json({ error: e.message });
+  }
 }
 
 export async function PUT(req, { params }) {
