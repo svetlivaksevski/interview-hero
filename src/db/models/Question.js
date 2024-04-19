@@ -6,6 +6,7 @@ const questionSchema = new Schema(
   {
     question: { type: String, required: true },
     answer: { type: String, required: true },
+    profileImage: { type: String },
     category: { type: String, required: true },
     difficulty: { type: String, required: true },
     userId: { type: Schema.Types.ObjectId, ref: "User" },

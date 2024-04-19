@@ -35,11 +35,11 @@ export default function QuestionPage({ params }) {
   const getCategoryColor = (data) => {
     switch (data.difficulty) {
       case "Easy":
-        return "#A1DE93";
+        return "easy";
       case "Medium":
-        return "#F7F48B";
+        return "medium";
       case "Hard":
-        return "#F47C7C";
+        return "hard";
       default:
         return "white";
     }
@@ -52,19 +52,26 @@ export default function QuestionPage({ params }) {
       <Header />
       <div className="container-questions">
         <div className="questions-data">
+          <div className="user-info">
+            <img src={data.profileImage} className="imagequestion" />
+            <div className="user-info-text">
+              <p className="text-question">
+                {data.userName} is just wondering: How would you tackle this
+                question?
+              </p>
+            </div>
+          </div>
           <h2>Your question:</h2>
           <p>{data.question}</p>
           <h2>Your answer:</h2>
           <p>{data.answer}</p>
-          <h3>Question category:</h3>
-          <p>{data.category}</p>
-          <h3>How challenging was this question to answer?</h3>
-          <p style={{ backgroundColor: color }}>{data.difficulty}</p>
           <div className="dots"></div>
-          <div className="user-info">
-            <p>Posted by {data.userName}</p>
-
+          <div className="category-info">
             <p>Created: {onlyDate}</p>
+            <p className="category-q">Question category:</p>
+            <p className="category-q-cont">{data.category}</p>
+            <p>How difficult was this question?</p>
+            <p className={color}>{data.difficulty}</p>
           </div>
           <div className="buttons-question">
             {session?.user.userId === data?.userId ? (
