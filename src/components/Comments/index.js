@@ -124,14 +124,11 @@ export default function Comments({ params, questionId }) {
               )}
             </p>
             <div className="dots"></div>
+            <button className="buttons" onClick={() => handleLike(comment._id)}>
+              Like {comment.likedByUserId?.length}
+            </button>
             {session?.user.userId === comment?.userId ? (
               <>
-                <button
-                  className="buttons"
-                  onClick={() => handleLike(comment._id)}
-                >
-                  Like {comment.likedByUserId?.length}
-                </button>
                 <button
                   onClick={() => setEditedCommentId(comment._id)}
                   className={
