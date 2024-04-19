@@ -14,7 +14,7 @@ export default function QuestionPage({ params }) {
   const { data: session } = useSession();
   const router = useRouter();
   const { id } = params;
-  const { data, error } = useSWR(`/api/question/${id}`, fetcher);
+  const { data, error, mutate } = useSWR(`/api/question/${id}`, fetcher);
 
   if (error) return <div>{`Failed to load :(`}</div>;
   if (!data) return;
@@ -82,7 +82,7 @@ export default function QuestionPage({ params }) {
           </div>
         </div>
 
-        <Comments questionId={id} />
+        <Comments questionId={id} mutate={mutate} />
         <CommentForm questionId={id} />
       </div>
       <Navigation />

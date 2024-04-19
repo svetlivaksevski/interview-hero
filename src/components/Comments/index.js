@@ -4,34 +4,35 @@ import useSWR from "swr";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { mutate } from "swr";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
-export default function Comments({ params, questionId }) {
+export default function Comments({ params, questionId, mutate }) {
   const { data: session } = useSession();
   const router = useRouter();
   const [editedCommentId, setEditedCommentId] = useState(null);
   const [commentText, setCommentText] = useState("");
   const [date, setDate] = useState("");
-
+  const [amountLikes, setAmountLikes] = useState(0);
+  const [isLiked, setIsLiked] = useState(false);
+  const [comments, setComments] = useState([]);
   const id = params;
-  const {
-    data: comments,
-    error,
-    isLoading,
-    mutate,
-  } = useSWR(`/api/comment/${questionId}`, fetcher);
+  // const {
+  //   data: comments,
+  //   error,
+  //   isLoading,
+  // } = useSWR(`/api/comment/${questionId}`, fetcher);
 
   useEffect(() => {
-    if (comments) {
-      comments.map((date) => {
-        const createdDate = date.created;
-        setDate(createdDate.substring(0, 10));
-      });
-    }
-  }, [comments]);
-  if (error) return <div>{`Failed to load :(`}</div>;
+    const fetchComments = async () => {
+      const res = await fetch(`/api/comment/${questionId}`);
+      const data = await res.json();
+      setComments(data);
+    };
+    fetchComments();
+  }, [comments, questionId]);
+
+  // if (error) return <div>{`Failed to load :(`}</div>;
   if (!comments) return;
 
   async function deleteComment(id) {
@@ -99,7 +100,9 @@ export default function Comments({ params, questionId }) {
               />
               <div className="p-comment">
                 <p className="author">{comment.userName}</p>
-                <p className="add-comment">posted at: {date}</p>
+                <p className="add-comment">
+                  posted at: {comment.created.substring(0, 10)}
+                </p>
               </div>
             </div>
             <p>
@@ -123,10 +126,16 @@ export default function Comments({ params, questionId }) {
                 </button>
               )}
             </p>
+
             <div className="dots"></div>
-            <button className="buttons" onClick={() => handleLike(comment._id)}>
-              Like {comment.likedByUserId?.length}
-            </button>
+            {session && (
+              <button
+                className="buttons"
+                onClick={() => handleLike(comment._id)}
+              >
+                Like {comment.likedByUserId.length}
+              </button>
+            )}
             {session?.user.userId === comment?.userId ? (
               <>
                 <button
