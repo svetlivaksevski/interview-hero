@@ -105,15 +105,24 @@ export default function QuestionPage({ params }) {
           <p>{data.answer}</p>
           <div className="dots"></div>
           <div className="category-info">
-            <p className="created">Created: {onlyDate}</p>
-            <p className="category-q">Question category:</p>
-            <p className="category-q-cont">{data.category}</p>
-            <p>How difficult was this question?</p>
-            <p className={color}>{data.difficulty}</p>
-            <form onSubmit={handleRating}>
+            <div className="box">
+              <p className="created-text">Created:</p>
+              <p className="created">{onlyDate}</p>
+            </div>
+            <div className="box">
+              <p className="category-q">Question category:</p>
+              <p className="category-q-cont">{data.category}</p>
+            </div>
+            <div className="box">
+              <p className="category-difficulty">
+                How difficult was this question?
+              </p>
+              <p className={color}>{data.difficulty}</p>
+            </div>
+            {/* <form onSubmit={handleRating}>
               <input type="number" min="1" max="5" name="rating" />
               <button type="submit">Submit Rating</button>
-            </form>
+            </form> */}
           </div>
         </div>
 
