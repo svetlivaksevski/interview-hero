@@ -52,32 +52,28 @@ export async function PATCH(request, { params }) {
   const userId = session.user.userId;
 
   try {
-    const existingRating = await Question.findOne({
-      _id: id,
-      "ratedByUserId.userId": userId,
+    const existingRating = await Question.findById(id);
+
+    const userRate = existingRating.ratedByUserId.find((user) => {
+      const userStr = user.userId.toString();
+      return userStr === userId;
     });
 
-    console.log(
-      "What i'm getting? -------------",
-      existingRating.ratedByUserId
-    );
+    let updatedRating;
 
-    // existingRating.ratedByUserId.forEach((element) => {
-    //   console.log("TEST: ", element);
-    // if (element.userId === userId) {
-    //   // element.rating = rating
-    // } else {
-    //   updatedRating.push({ rating, userId });
-    // }
-    // });
-
-    // } if  {
-    //   updatedRating = await Question.findByIdAndUpdate(
-    //     id,
-    //     { $push: { ratedByUserId: { userId, rating } } },
-    //     { new: true }
-    //   );
-    // }
+    if (userRate) {
+      updatedRating = await Question.findOneAndUpdate(
+        { _id: id, "ratedByUserId.userId": userId },
+        { $set: { "ratedByUserId.$.rating": rating } },
+        { new: true }
+      );
+    } else {
+      updatedRating = await Question.findOneAndUpdate(
+        { _id: id },
+        { $set: { ratedByUserId: { userId, rating } } },
+        { new: true }
+      );
+    }
 
     if (!updatedRating) {
       return NextResponse.status(404).json({ error: "Rating not found" });

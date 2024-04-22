@@ -65,30 +65,29 @@ export default function QuestionPage() {
           container-category"
           >
             <div onClick={() => handleCategorySelect(null)}>
-              {" "}
-              <LiaClipboardListSolid className="icons" fontSize={20} />
-              All
-            </div>{" "}
+              <LiaClipboardListSolid className="icons" fontSize={25} />
+              <p className="icons-container"> All</p>
+            </div>
             <div
               onClick={() => handleCategorySelect("Behavioral & Cultural Fit")}
             >
-              <p>
-                <LiaGlobeEuropeSolid className="icons" fontSize={20} />
+              <p className="icons-container">
+                <LiaGlobeEuropeSolid className="icons" fontSize={25} />
                 Behavioral & Cultural Fit
               </p>
             </div>
             <div onClick={() => handleCategorySelect("Technical")}>
-              <p>
-                <LiaCodeSolid className="icons" fontSize={20} />
+              <p className="icons-container">
+                <LiaCodeSolid className="icons" fontSize={25} />
                 Technical
               </p>
             </div>
             <div
               onClick={() => handleCategorySelect("Compensation and Benefits")}
             >
-              <p>
-                <LiaMoneyBillWaveAltSolid className="icons" fontSize={20} />{" "}
-                Compensation and Benefits
+              <p className="icons-container">
+                <LiaMoneyBillWaveAltSolid className="icons" fontSize={25} />{" "}
+                Compensation & Benefits
               </p>
             </div>
             <div
@@ -96,20 +95,20 @@ export default function QuestionPage() {
                 handleCategorySelect("Professional Development and Growth")
               }
             >
-              <p>
-                <LiaGraduationCapSolid className="icons" fontSize={20} />{" "}
-                Professional Development and Growth
+              <p className="icons-container">
+                <LiaGraduationCapSolid className="icons" fontSize={25} />
+                Professional Development
               </p>
             </div>
             <div onClick={() => handleCategorySelect("Problem-Solving")}>
-              <p>
-                <LiaPuzzlePieceSolid className="icons" fontSize={20} />
+              <p className="icons-container">
+                <LiaPuzzlePieceSolid className="icons" fontSize={25} />
                 Problem-Solving
               </p>
             </div>
             <div onClick={() => handleCategorySelect("Other")}>
-              <LiaBarsSolid className="icons" fontSize={20} />
-              Other
+              <LiaBarsSolid className="icons" fontSize={25} />
+              <p className="icons-container">Other</p>
             </div>
           </div>
           <form className="search-bar" onSubmit={(e) => e.preventDefault()}>
