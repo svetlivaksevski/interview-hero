@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import Question from "@/db/models/Question";
 import dbConnect from "@/db/connect";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 export async function GET(req, { params }) {
   await dbConnect();
@@ -22,14 +24,14 @@ export async function PUT(req, { params }) {
     return NextResponse.json({ status: 200 });
   } catch (e) {
     console.error(e);
-    return response.status(400).json({ error: e.message });
+    return NextResponse.status(400).json({ error: e.message });
   }
 }
 
 export async function DELETE(req, { params }) {
   try {
-    await dbConnect();
     const { id } = params;
+    await dbConnect();
     await Question.findByIdAndDelete(id);
     return NextResponse.json({
       status: 200,
@@ -37,5 +39,52 @@ export async function DELETE(req, { params }) {
   } catch (e) {
     console.error(e);
     return NextResponse.status(400).json({ error: e.message });
+  }
+}
+
+export async function PATCH(request, { params }) {
+  const { rating } = await request.json();
+  await dbConnect();
+  const { id } = params;
+
+  const session = await getServerSession(authOptions);
+
+  const userId = session.user.userId;
+
+  try {
+    const existingRating = await Question.findOne({
+      _id: id,
+      "ratedByUserId.userId": userId,
+    });
+
+    console.log(
+      "What i'm getting? -------------",
+      existingRating.ratedByUserId
+    );
+
+    // existingRating.ratedByUserId.forEach((element) => {
+    //   console.log("TEST: ", element);
+    // if (element.userId === userId) {
+    //   // element.rating = rating
+    // } else {
+    //   updatedRating.push({ rating, userId });
+    // }
+    // });
+
+    // } if  {
+    //   updatedRating = await Question.findByIdAndUpdate(
+    //     id,
+    //     { $push: { ratedByUserId: { userId, rating } } },
+    //     { new: true }
+    //   );
+    // }
+
+    if (!updatedRating) {
+      return NextResponse.status(404).json({ error: "Rating not found" });
+    }
+
+    return NextResponse.json(updatedRating);
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 400 });
   }
 }

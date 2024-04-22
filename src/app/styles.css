@@ -1,4 +1,5 @@
-@import url("../app/question/questionStyling.css");
+@import "../app/question/questionStyling.css";
+@import "./api/../../components/Comments/comments.css";
 
 .navigation {
   display: flex;
@@ -226,6 +227,8 @@ input {
   flex-wrap: wrap;
   gap: 25px;
   justify-content: center;
+  background-color: #def2f1;
+  padding: 20px;
 }
 
 .questions-container {
@@ -237,6 +240,11 @@ input {
 
 .icons {
   margin-right: 5px;
-  color: white;
+  color: #2b7a78;
   border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin: 5px;
 }

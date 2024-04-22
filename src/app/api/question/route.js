@@ -3,6 +3,7 @@ import Question from "../../../db/models/Question";
 import dbConnect from "../../../db/connect";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { loadGetInitialProps } from "next/dist/shared/lib/utils";
 
 export async function GET(request) {
   await dbConnect();

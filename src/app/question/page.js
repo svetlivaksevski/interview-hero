@@ -5,7 +5,13 @@ import Navigation from "../../components/Navigation";
 import Header from "../../components/Header";
 import { useState } from "react";
 import Link from "next/link";
-import { FaCode } from "react-icons/fa6";
+import { LiaCodeSolid } from "react-icons/lia";
+import { LiaMoneyBillWaveAltSolid } from "react-icons/lia";
+import { LiaGraduationCapSolid } from "react-icons/lia";
+import { LiaPuzzlePieceSolid } from "react-icons/lia";
+import { LiaClipboardListSolid } from "react-icons/lia";
+import { LiaGlobeEuropeSolid } from "react-icons/lia";
+import { LiaBarsSolid } from "react-icons/lia";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
@@ -58,34 +64,53 @@ export default function QuestionPage() {
             className="
           container-category"
           >
-            <div onClick={() => handleCategorySelect(null)}>All</div>{" "}
+            <div onClick={() => handleCategorySelect(null)}>
+              {" "}
+              <LiaClipboardListSolid className="icons" fontSize={20} />
+              All
+            </div>{" "}
             <div
               onClick={() => handleCategorySelect("Behavioral & Cultural Fit")}
             >
-              <p>Behavioral & Cultural Fit</p>
+              <p>
+                <LiaGlobeEuropeSolid className="icons" fontSize={20} />
+                Behavioral & Cultural Fit
+              </p>
             </div>
             <div onClick={() => handleCategorySelect("Technical")}>
               <p>
-                <FaCode className="icons" color="#2b7a78" />
+                <LiaCodeSolid className="icons" fontSize={20} />
                 Technical
               </p>
             </div>
             <div
               onClick={() => handleCategorySelect("Compensation and Benefits")}
             >
-              <p>Compensation and Benefits</p>
+              <p>
+                <LiaMoneyBillWaveAltSolid className="icons" fontSize={20} />{" "}
+                Compensation and Benefits
+              </p>
             </div>
             <div
               onClick={() =>
                 handleCategorySelect("Professional Development and Growth")
               }
             >
-              <p>Professional Development and Growth</p>
+              <p>
+                <LiaGraduationCapSolid className="icons" fontSize={20} />{" "}
+                Professional Development and Growth
+              </p>
             </div>
             <div onClick={() => handleCategorySelect("Problem-Solving")}>
-              <p>Problem-Solving</p>
+              <p>
+                <LiaPuzzlePieceSolid className="icons" fontSize={20} />
+                Problem-Solving
+              </p>
             </div>
-            <div onClick={() => handleCategorySelect("Other")}>Other</div>
+            <div onClick={() => handleCategorySelect("Other")}>
+              <LiaBarsSolid className="icons" fontSize={20} />
+              Other
+            </div>
           </div>
           <form className="search-bar" onSubmit={(e) => e.preventDefault()}>
             <input
