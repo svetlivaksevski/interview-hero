@@ -8,11 +8,13 @@ import RecentlyAdded from "@/components/RecentlyAdded";
 export default function Home() {
   return (
     <main>
-      <Header />
-      <Randomquestion />
-      <div>Add question button</div>
-      <RecentlyAdded />
-      <Navigation />
+      <div className="mainpage">
+        <Header />
+        <Randomquestion />
+        <div>Add question button</div>
+        <RecentlyAdded />
+        <Navigation />
+      </div>
     </main>
   );
 }

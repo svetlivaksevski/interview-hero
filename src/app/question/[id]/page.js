@@ -9,6 +9,7 @@ import Comments from "@/components/Comments";
 import CommentForm from "@/components/CommentForm";
 import { LiaEdit } from "react-icons/lia";
 import { LiaTrashAltSolid } from "react-icons/lia";
+import { FaStar } from "react-icons/fa";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
@@ -49,12 +50,33 @@ export default function QuestionPage({ params }) {
 
   const color = getCategoryColor(data);
 
+  const getRaiting = (data) => {
+    switch (data.difficulty) {
+      case "1":
+        return "easy";
+      case "2":
+        return "medium";
+      case "3":
+        return "hard";
+      case "4":
+        return "hard";
+      case "5":
+        return "hard";
+      default:
+        return "null";
+    }
+  };
+
+  // const rating = getRaiting(data);
+
+  // const rating = data.ratedByUserId[0].rating;
+
   async function handleRating(e) {
     e.preventDefault();
-    console.log(id);
 
     const formData = new FormData(event.target);
     const { rating } = Object.fromEntries(formData);
+    console.log("Do I get the data? ", rating);
 
     const response = await fetch(`/api/question/${id}`, {
       method: "PATCH",
@@ -119,9 +141,37 @@ export default function QuestionPage({ params }) {
               </p>
               <p className={color}>{data.difficulty}</p>
             </div>
-            {/* <form onSubmit={handleRating}>
+            <form onSubmit={handleRating}>
               <input type="number" min="1" max="5" name="rating" />
               <button type="submit">Submit Rating</button>
+            </form>
+
+            {/* <form>
+              {[1, 2, 3, 4, 5].map((star) => (
+                <label
+                  key={star}
+                  onClick={() => document.getElementById("ratingForm").submit()}
+                >
+                  <input
+                    type="radio"
+                    name="rating"
+                    value={star}
+                    defaultChecked={rating === star}
+                    style={{ display: "none" }}
+                  />
+                  <FaStar
+                    size={24}
+                    color={rating >= star ? "#ffc107" : "#fcfcfc"}
+                    fill={rating >= star ? "#ffc107" : "#fcfcfc"}
+                    style={{ cursor: "pointer" }}
+                  />
+                </label>
+              ))}
+              <button
+                id="ratingForm"
+                style={{ display: "none" }}
+                onClick={handleRating}
+              ></button>
             </form> */}
           </div>
         </div>

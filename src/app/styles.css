@@ -227,10 +227,12 @@ input {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 25px;
+  gap: 20px;
   justify-content: center;
   background-color: #def2f1;
-  padding: 20px;
+  padding: 15px;
+  font-size: 12px;
+  cursor: pointer;
 }
 
 .questions-container {
@@ -249,4 +251,11 @@ input {
   display: flex;
   align-items: center;
   margin: 5px;
+}
+
+.icons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #2b7a78;
 }

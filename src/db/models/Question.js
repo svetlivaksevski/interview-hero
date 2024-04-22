@@ -11,10 +11,13 @@ const questionSchema = new Schema(
     difficulty: { type: String, required: true },
     userId: { type: Schema.Types.ObjectId, ref: "User" },
     userName: { type: String },
-    ratedByUserId: {
-      rating: { type: Number, required: true, min: 1, max: 5 },
-      userId: { type: Schema.Types.ObjectId, ref: "User" },
-    },
+
+    ratedByUserId: [
+      {
+        rating: { type: Number, required: true, min: 1, max: 5 },
+        userId: { type: Schema.Types.ObjectId, ref: "User" },
+      },
+    ],
   },
   {
     timestamps: true,
