@@ -4,6 +4,14 @@ import useSWR from "swr";
 import Navigation from "../../components/Navigation";
 import Header from "../../components/Header";
 import { useState } from "react";
+import Link from "next/link";
+import { LiaCodeSolid } from "react-icons/lia";
+import { LiaMoneyBillWaveAltSolid } from "react-icons/lia";
+import { LiaGraduationCapSolid } from "react-icons/lia";
+import { LiaPuzzlePieceSolid } from "react-icons/lia";
+import { LiaClipboardListSolid } from "react-icons/lia";
+import { LiaGlobeEuropeSolid } from "react-icons/lia";
+import { LiaBarsSolid } from "react-icons/lia";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
@@ -45,6 +53,7 @@ export default function QuestionPage() {
     setSelectedCategory(category);
   };
 
+  console.log(filteredCategoryQuestions);
   return (
     <>
       <Header />
@@ -55,31 +64,53 @@ export default function QuestionPage() {
             className="
           container-category"
           >
-            <div onClick={() => handleCategorySelect(null)}>All</div>{" "}
+            <div onClick={() => handleCategorySelect(null)}>
+              {" "}
+              <LiaClipboardListSolid className="icons" fontSize={20} />
+              All
+            </div>{" "}
             <div
               onClick={() => handleCategorySelect("Behavioral & Cultural Fit")}
             >
-              <p>Behavioral & Cultural Fit</p>
+              <p>
+                <LiaGlobeEuropeSolid className="icons" fontSize={20} />
+                Behavioral & Cultural Fit
+              </p>
             </div>
             <div onClick={() => handleCategorySelect("Technical")}>
-              <p>Technical</p>
+              <p>
+                <LiaCodeSolid className="icons" fontSize={20} />
+                Technical
+              </p>
             </div>
             <div
               onClick={() => handleCategorySelect("Compensation and Benefits")}
             >
-              <p>Compensation and Benefits</p>
+              <p>
+                <LiaMoneyBillWaveAltSolid className="icons" fontSize={20} />{" "}
+                Compensation and Benefits
+              </p>
             </div>
             <div
               onClick={() =>
                 handleCategorySelect("Professional Development and Growth")
               }
             >
-              <p>Professional Development and Growth</p>
+              <p>
+                <LiaGraduationCapSolid className="icons" fontSize={20} />{" "}
+                Professional Development and Growth
+              </p>
             </div>
             <div onClick={() => handleCategorySelect("Problem-Solving")}>
-              <p>Problem-Solving</p>
+              <p>
+                <LiaPuzzlePieceSolid className="icons" fontSize={20} />
+                Problem-Solving
+              </p>
             </div>
-            <div onClick={() => handleCategorySelect("Other")}>Other</div>
+            <div onClick={() => handleCategorySelect("Other")}>
+              <LiaBarsSolid className="icons" fontSize={20} />
+              Other
+            </div>
           </div>
           <form className="search-bar" onSubmit={(e) => e.preventDefault()}>
             <input
@@ -104,14 +135,22 @@ export default function QuestionPage() {
               {filteredCategoryQuestions.length > 0 ? (
                 <div className="questions-container">
                   {filteredCategoryQuestions.slice(0, displayCount).map((q) => (
-                    <div className="container-questions-list" key={q._id}>
-                      <h2>Your question:</h2>
-                      <p>{q.question}</p>
-                      <h3>See the answer:</h3>
-                      <a href={`question/${q._id}`}>
-                        Click here to see the answer...
-                      </a>
-                    </div>
+                    <Link href={`question/${q._id}`} key={q._id}>
+                      <div className="container-questions-list">
+                        <h2>Your question:</h2>
+                        <p>{q.question}</p>
+
+                        <a className="seetheanswer" href={`question/${q._id}`}>
+                          Click here to see the answer...
+                        </a>
+                        <div className="dots"></div>
+
+                        <p className="category-q">
+                          Category:
+                          <p className="category-q-cont">{q.category}</p>
+                        </p>
+                      </div>
+                    </Link>
                   ))}
                   {filteredCategoryQuestions.length > displayCount && (
                     <span className="showmore" onClick={handleShowMore}>

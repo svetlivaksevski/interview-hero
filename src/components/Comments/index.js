@@ -2,6 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
+import { FaRegHeart } from "react-icons/fa6";
+import { FaPencil } from "react-icons/fa6";
+import { FaTrashCan } from "react-icons/fa6";
+import { LiaEdit } from "react-icons/lia";
+import { LiaTrashAltSolid } from "react-icons/lia";
 
 export default function Comments({ params, questionId, mutate }) {
   const { data: session } = useSession();
@@ -115,37 +120,40 @@ export default function Comments({ params, questionId, mutate }) {
             </p>
 
             <div className="dots"></div>
-            {session && (
-              <button
-                className="buttons"
-                onClick={() => handleLike(comment._id)}
-              >
-                Like {comment.likedByUserId.length}
-              </button>
-            )}
-            {session?.user.userId === comment?.userId ? (
-              <>
+            <div className="comment-icons">
+              {session && (
                 <button
-                  onClick={() => setEditedCommentId(comment._id)}
-                  className={
-                    editedCommentId === comment._id
-                      ? "buttons disabled"
-                      : "buttons"
-                  }
-                  disabled={editedCommentId === comment._id}
+                  className="icons"
+                  onClick={() => handleLike(comment._id)}
                 >
-                  Edit
+                  <FaRegHeart fontSize={15} />
+                  <p>{comment.likedByUserId.length}</p>
                 </button>
-                <button
-                  onClick={() => deleteComment(comment._id)}
-                  className="buttons"
-                >
-                  Delete
-                </button>
-              </>
-            ) : (
-              <p></p>
-            )}
+              )}
+              {session?.user.userId === comment?.userId ? (
+                <>
+                  <button
+                    onClick={() => setEditedCommentId(comment._id)}
+                    className={
+                      editedCommentId === comment._id
+                        ? "icons disabled"
+                        : "icons"
+                    }
+                    disabled={editedCommentId === comment._id}
+                  >
+                    <LiaEdit fontSize={15} />
+                  </button>
+                  <button
+                    onClick={() => deleteComment(comment._id)}
+                    className="icons"
+                  >
+                    <LiaTrashAltSolid fontSize={15} />
+                  </button>
+                </>
+              ) : (
+                <p></p>
+              )}
+            </div>
           </div>
         ))}
       </div>
