@@ -1,5 +1,3 @@
-import Image from "next/image";
-import styles from "./page.module.css";
 import Header from "../components/Header";
 import Randomquestion from "../components/Randomquestion";
 import Navigation from "../components/Navigation";
@@ -10,8 +8,14 @@ export default function Home() {
     <main>
       <div className="mainpage">
         <Header />
+        <h2>What is Interview Hero?</h2>
+        <p className="intro-homepage">
+          We are an interactive platform on a mission to help people finding
+          their dream job. How? By providing tips and tricks how to answer your
+          interview questions, which could increase your performance during the
+          interview and increase chances to find the right job.
+        </p>
         <Randomquestion />
-        <div>Add question button</div>
         <RecentlyAdded />
         <Navigation />
       </div>
