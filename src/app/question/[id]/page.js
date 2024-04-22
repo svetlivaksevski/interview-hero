@@ -7,6 +7,7 @@ import Navigation from "../../../components/Navigation";
 import Header from "../../../components/Header";
 import Comments from "@/components/Comments";
 import CommentForm from "@/components/CommentForm";
+import { TbEdit } from "react-icons/tb";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
@@ -55,6 +56,20 @@ export default function QuestionPage({ params }) {
           <div className="user-info">
             <img src={data.profileImage} className="imagequestion" />
             <div className="user-info-text">
+              <div className="buttons-question">
+                {session?.user.userId === data?.userId ? (
+                  <>
+                    <Link href={`/question/${id}/edit`} className="icons">
+                      <TbEdit />
+                    </Link>
+                    <button onClick={deleteQuestion} className="buttons">
+                      Delete
+                    </button>
+                  </>
+                ) : (
+                  <p></p>
+                )}
+              </div>
               <p className="text-question">
                 {data.userName} is just wondering: How would you tackle this
                 question?
@@ -67,25 +82,11 @@ export default function QuestionPage({ params }) {
           <p>{data.answer}</p>
           <div className="dots"></div>
           <div className="category-info">
-            <p>Created: {onlyDate}</p>
+            <p className="created">Created: {onlyDate}</p>
             <p className="category-q">Question category:</p>
             <p className="category-q-cont">{data.category}</p>
             <p>How difficult was this question?</p>
             <p className={color}>{data.difficulty}</p>
-          </div>
-          <div className="buttons-question">
-            {session?.user.userId === data?.userId ? (
-              <>
-                <Link href={`/question/${id}/edit`} className="buttons">
-                  Edit question
-                </Link>
-                <button onClick={deleteQuestion} className="buttons">
-                  Delete
-                </button>
-              </>
-            ) : (
-              <p></p>
-            )}
           </div>
         </div>
 

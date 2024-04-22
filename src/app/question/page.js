@@ -4,6 +4,8 @@ import useSWR from "swr";
 import Navigation from "../../components/Navigation";
 import Header from "../../components/Header";
 import { useState } from "react";
+import Link from "next/link";
+import { FaCode } from "react-icons/fa6";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
@@ -45,6 +47,7 @@ export default function QuestionPage() {
     setSelectedCategory(category);
   };
 
+  console.log(filteredCategoryQuestions);
   return (
     <>
       <Header />
@@ -62,7 +65,10 @@ export default function QuestionPage() {
               <p>Behavioral & Cultural Fit</p>
             </div>
             <div onClick={() => handleCategorySelect("Technical")}>
-              <p>Technical</p>
+              <p>
+                <FaCode className="icons" color="#2b7a78" />
+                Technical
+              </p>
             </div>
             <div
               onClick={() => handleCategorySelect("Compensation and Benefits")}
@@ -104,14 +110,22 @@ export default function QuestionPage() {
               {filteredCategoryQuestions.length > 0 ? (
                 <div className="questions-container">
                   {filteredCategoryQuestions.slice(0, displayCount).map((q) => (
-                    <div className="container-questions-list" key={q._id}>
-                      <h2>Your question:</h2>
-                      <p>{q.question}</p>
-                      <h3>See the answer:</h3>
-                      <a href={`question/${q._id}`}>
-                        Click here to see the answer...
-                      </a>
-                    </div>
+                    <Link href={`question/${q._id}`} key={q._id}>
+                      <div className="container-questions-list">
+                        <h2>Your question:</h2>
+                        <p>{q.question}</p>
+
+                        <a className="seetheanswer" href={`question/${q._id}`}>
+                          Click here to see the answer...
+                        </a>
+                        <div className="dots"></div>
+
+                        <p className="category-q">
+                          Category:
+                          <p className="category-q-cont">{q.category}</p>
+                        </p>
+                      </div>
+                    </Link>
                   ))}
                   {filteredCategoryQuestions.length > displayCount && (
                     <span className="showmore" onClick={handleShowMore}>
