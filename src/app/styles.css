@@ -44,7 +44,7 @@ span {
   padding: 15px;
   margin-top: 0;
   border-bottom: 1px solid #def2f1;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 
 .intro {
@@ -63,8 +63,9 @@ span {
 .randomquestion {
   padding: 50px;
   border-style: dashed;
+  border-radius: 10px;
   margin: 10px;
-  width: 350px;
+  width: 550px;
 }
 
 .container {
@@ -84,6 +85,14 @@ span {
   gap: 10px;
 }
 
+.intro-homepage {
+  border: 1px solid #def2f1;
+  padding: 30px;
+  width: 550px;
+  margin: 20px;
+  border-radius: 10px;
+}
+
 .profilepicture {
   border-radius: 100px;
   width: 150px;
@@ -96,6 +105,7 @@ span {
   padding: 40px;
   border: 1px solid #def2f1;
   width: 350px;
+  border-radius: 10px;
   margin: 10px;
 }
 
