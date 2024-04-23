@@ -104,7 +104,7 @@ export default function QuestionPage({ params }) {
                 )}
               </div>
               <p className="text-question">
-                {data.userName} is just wondering: How would you tackle this
+                {data.userName} is just wondering: How would you handle this
                 question?
               </p>
             </div>
