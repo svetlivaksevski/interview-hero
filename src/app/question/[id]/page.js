@@ -50,33 +50,24 @@ export default function QuestionPage({ params }) {
 
   const color = getCategoryColor(data);
 
-  const getRaiting = (data) => {
-    switch (data.difficulty) {
-      case "1":
-        return "easy";
-      case "2":
-        return "medium";
-      case "3":
-        return "hard";
-      case "4":
-        return "hard";
-      case "5":
-        return "hard";
-      default:
-        return "null";
-    }
-  };
+  const rating = data.ratedByUserId.map((item) => item.rating);
+  const sumOfRatings = rating.reduce((acc, rating) => acc + rating, 0);
+  const averageRating = sumOfRatings / rating.length;
+  const roundedAverageRating = Math.round(averageRating);
 
-  // const rating = getRaiting(data);
-
-  // const rating = data.ratedByUserId[0].rating;
+  console.log("What is in there?", roundedAverageRating);
 
   async function handleRating(e) {
     e.preventDefault();
 
-    const formData = new FormData(event.target);
-    const { rating } = Object.fromEntries(formData);
+    const formData = new FormData(document.querySelector("form"));
+    const rating = formData.get("rating");
     console.log("Do I get the data? ", rating);
+
+    if (!rating || isNaN(rating)) {
+      console.error("Invalid rating value");
+      return;
+    }
 
     const response = await fetch(`/api/question/${id}`, {
       method: "PATCH",
@@ -142,27 +133,20 @@ export default function QuestionPage({ params }) {
               <p className={color}>{data.difficulty}</p>
             </div>
             <form onSubmit={handleRating}>
-              <input type="number" min="1" max="5" name="rating" />
-              <button type="submit">Submit Rating</button>
-            </form>
-
-            {/* <form>
               {[1, 2, 3, 4, 5].map((star) => (
-                <label
-                  key={star}
-                  onClick={() => document.getElementById("ratingForm").submit()}
-                >
+                <label key={star}>
                   <input
                     type="radio"
                     name="rating"
                     value={star}
-                    defaultChecked={rating === star}
+                    onChange={handleRating}
+                    defaultChecked={roundedAverageRating === star}
                     style={{ display: "none" }}
                   />
                   <FaStar
                     size={24}
-                    color={rating >= star ? "#ffc107" : "#fcfcfc"}
-                    fill={rating >= star ? "#ffc107" : "#fcfcfc"}
+                    color={roundedAverageRating >= star ? "#ffc107" : "#fcfcfc"}
+                    fill={roundedAverageRating >= star ? "#ffc107" : "#fcfcfc"}
                     style={{ cursor: "pointer" }}
                   />
                 </label>
@@ -172,7 +156,7 @@ export default function QuestionPage({ params }) {
                 style={{ display: "none" }}
                 onClick={handleRating}
               ></button>
-            </form> */}
+            </form>
           </div>
         </div>
 
