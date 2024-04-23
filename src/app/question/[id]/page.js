@@ -84,6 +84,7 @@ export default function QuestionPage({ params }) {
   return (
     <>
       <Header />
+      <span onClick={() => window.history.back()}>← Go back</span>
       <div className="container-questions">
         <div className="questions-data">
           <div className="user-info">

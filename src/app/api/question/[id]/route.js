@@ -70,7 +70,7 @@ export async function PATCH(request, { params }) {
     } else {
       updatedRating = await Question.findOneAndUpdate(
         { _id: id },
-        { $set: { ratedByUserId: { userId, rating } } },
+        { $push: { ratedByUserId: { userId, rating } } },
         { new: true }
       );
     }
