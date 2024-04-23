@@ -4,14 +4,15 @@ import useSWR from "swr";
 import Navigation from "../../components/Navigation";
 import Header from "../../components/Header";
 import { useState } from "react";
-import Link from "next/link";
-import { LiaCodeSolid } from "react-icons/lia";
-import { LiaMoneyBillWaveAltSolid } from "react-icons/lia";
-import { LiaGraduationCapSolid } from "react-icons/lia";
-import { LiaPuzzlePieceSolid } from "react-icons/lia";
-import { LiaClipboardListSolid } from "react-icons/lia";
-import { LiaGlobeEuropeSolid } from "react-icons/lia";
-import { LiaBarsSolid } from "react-icons/lia";
+import {
+  LiaCodeSolid,
+  LiaMoneyBillWaveAltSolid,
+  LiaGraduationCapSolid,
+  LiaPuzzlePieceSolid,
+  LiaClipboardListSolid,
+  LiaGlobeEuropeSolid,
+  LiaBarsSolid,
+} from "react-icons/lia";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
@@ -133,17 +134,14 @@ export default function QuestionPage() {
               {filteredCategoryQuestions.length > 0 ? (
                 <div className="questions-container">
                   {filteredCategoryQuestions.slice(0, displayCount).map((q) => (
-                    <Link href={`question/${q._id}`} key={q._id}>
+                    <a href={`question/${q._id}`} key={q._id}>
                       <div className="container-questions-list">
                         <h2>Your question:</h2>
                         <p>{q.question}</p>
 
-                        <Link
-                          className="seetheanswer"
-                          href={`question/${q._id}`}
-                        >
+                        <span className="seetheanswer">
                           Click here to see the answer...
-                        </Link>
+                        </span>
                         <div className="dots"></div>
 
                         <span className="category-q">
@@ -151,7 +149,7 @@ export default function QuestionPage() {
                           <span className="category-q-cont">{q.category}</span>
                         </span>
                       </div>
-                    </Link>
+                    </a>
                   ))}
                   {filteredCategoryQuestions.length > displayCount && (
                     <span className="showmore" onClick={handleShowMore}>
