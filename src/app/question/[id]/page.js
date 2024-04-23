@@ -86,50 +86,51 @@ export default function QuestionPage({ params }) {
   return (
     <>
       <Header />
+
       {/* <span onClick={() => window.history.back()}>← Go back</span> */}
       <div className="container-questions">
+        <div className="user-info-text">
+          <img src={data.profileImage} className="imagequestion" />
+          <span className="text-question">
+            Help {data.userName} to answer this question the next time in a
+            better way. What will be your answer?
+          </span>
+        </div>
         <div className="questions-data">
           <div className="user-info">
-            <div className="user-info-text">
-              <img src={data.profileImage} className="imagequestion" />
-              <p className="text-question">
-                {data.userName} is just wondering: How would you handle this
-                question?
-              </p>
-              <div className="buttons-question">
-                {session?.user.userId === data?.userId ? (
-                  <>
-                    <Link href={`/question/${id}/edit`} className="icons">
-                      <LiaEdit fontSize={20} />
-                    </Link>
-                    <button onClick={deleteQuestion} className="icons">
-                      <LiaTrashAltSolid fontSize={20} />
-                    </button>
-                  </>
-                ) : (
-                  <p></p>
-                )}
-              </div>
+            <div className="buttons-question">
+              {session?.user.userId === data?.userId ? (
+                <>
+                  <Link href={`/question/${id}/edit`} className="icons">
+                    <LiaEdit fontSize={20} />
+                  </Link>
+                  <button onClick={deleteQuestion} className="icons">
+                    <LiaTrashAltSolid fontSize={20} />
+                  </button>
+                </>
+              ) : (
+                <p></p>
+              )}
             </div>
           </div>
-          <h2>Your question:</h2>
+          <h2>The question: </h2>
           <p>{data.question}</p>
-          <h2>Your answer:</h2>
+          <h2>The answer:</h2>
           <p>{data.answer}</p>
           <div className="dots"></div>
           <div className="category-info">
             <div className="box">
-              <p className="created-text">Created:</p>
-              <p className="created">{onlyDate}</p>
+              <span className="created-text">Created:</span>
+              <span className="created">{onlyDate}</span>
             </div>
             <div className="box">
-              <p className="category-q">Question category:</p>
-              <p className="category-q-cont">{data.category}</p>
+              <span className="category-q">Question category:</span>
+              <span className="category-q-cont">{data.category}</span>
             </div>
             <div className="box">
-              <p className="category-difficulty">
+              <span className="category-difficulty">
                 How difficult was this question?
-              </p>
+              </span>
               <p className={color}>{data.difficulty}</p>
             </div>
             <div className="box">
@@ -147,15 +148,23 @@ export default function QuestionPage({ params }) {
                           style={{ display: "none" }}
                         />
                         {star <= roundedAverageRating ? (
-                          <span role="img" aria-label="Star">
+                          <span
+                            role="img"
+                            aria-label="Star"
+                            className="rating-star"
+                          >
                             <FaStar fill="#fbb117" />
                           </span>
                         ) : star - roundedAverageRating === 0.5 ? (
-                          <span>
+                          <span className="rating-star">
                             <FaStarHalfAlt fill="#fbb117" />
                           </span>
                         ) : (
-                          <span role="img" aria-label="Empty Star">
+                          <span
+                            role="img"
+                            aria-label="Empty Star"
+                            className="rating-star"
+                          >
                             <FaRegStar />
                           </span>
                         )}

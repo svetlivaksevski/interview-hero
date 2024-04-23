@@ -53,7 +53,6 @@ export default function QuestionPage() {
     setSelectedCategory(category);
   };
 
-  console.log(filteredCategoryQuestions);
   return (
     <>
       <Header />
@@ -139,15 +138,18 @@ export default function QuestionPage() {
                         <h2>Your question:</h2>
                         <p>{q.question}</p>
 
-                        <a className="seetheanswer" href={`question/${q._id}`}>
+                        <Link
+                          className="seetheanswer"
+                          href={`question/${q._id}`}
+                        >
                           Click here to see the answer...
-                        </a>
+                        </Link>
                         <div className="dots"></div>
 
-                        <p className="category-q">
+                        <span className="category-q">
                           Category:
-                          <p className="category-q-cont">{q.category}</p>
-                        </p>
+                          <span className="category-q-cont">{q.category}</span>
+                        </span>
                       </div>
                     </Link>
                   ))}

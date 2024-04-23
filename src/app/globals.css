@@ -30,9 +30,3 @@ h2 {
   color: #3aafa9;
   font-family: "Zilla Slab", serif;
 }
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-}

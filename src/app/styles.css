@@ -31,9 +31,6 @@ a {
   display: flex;
 }
 
-span {
-  padding-top: 10px;
-}
 .header {
   display: flex;
   flex-direction: column;
@@ -146,12 +143,6 @@ input {
   align-items: center;
 }
 
-.questions-data {
-  padding: 70px;
-  border-radius: 10px;
-  background-color: #def2f1;
-}
-
 .buttons {
   border: none;
   font-size: 16px;
@@ -173,18 +164,6 @@ input {
   margin-bottom: 10px;
   border-top: 1px solid rgb(200, 200, 200);
   flex-wrap: wrap;
-}
-
-.comments-container {
-  margin-top: 20px;
-}
-
-.comments-container-content {
-  display: flex;
-  flex-direction: column;
-  margin: 20px;
-  border: 1px solid #def2f1;
-  padding: 40px 70px;
 }
 
 .imagecomment {
@@ -253,14 +232,11 @@ input {
 }
 
 .icons {
-  margin-right: 5px;
-  color: #2b7a78;
-  border-radius: 50px;
   border: none;
   cursor: pointer;
   display: flex;
-  align-items: center;
-  margin: 5px;
+  align-items: flex-end;
+  background-color: transparent;
 }
 
 .icons-container {
