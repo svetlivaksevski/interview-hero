@@ -55,14 +55,11 @@ export default function QuestionPage({ params }) {
   const averageRating = sumOfRatings / rating.length;
   const roundedAverageRating = Math.round(averageRating);
 
-  console.log("What is in there?", roundedAverageRating);
-
   async function handleRating(e) {
     e.preventDefault();
 
     const formData = new FormData(document.querySelector("form"));
     const rating = formData.get("rating");
-    console.log("Do I get the data? ", rating);
 
     if (!rating || isNaN(rating)) {
       console.error("Invalid rating value");
