@@ -1,5 +1,6 @@
-@import "../app/question/questionStyling.css";
+@import "../app/question/question.css";
 @import "./api/../../components/Comments/comments.css";
+@import "./profile/profile.css";
 
 .navigation {
   display: flex;

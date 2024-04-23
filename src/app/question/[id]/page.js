@@ -92,8 +92,8 @@ export default function QuestionPage({ params }) {
         <div className="user-info-text">
           <img src={data.profileImage} className="imagequestion" />
           <span className="text-question">
-            Help {data.userName} to answer this question the next time in a
-            better way. What will be your answer?
+            Help {data.userName} to answer this question in a better way the
+            next time. What will be your answer on it?
           </span>
         </div>
         <div className="questions-data">
