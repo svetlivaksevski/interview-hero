@@ -2,3 +2,41 @@
   display: flex;
   gap: 5px;
 }
+
+.comment-longin {
+  padding-top: 30px;
+  padding-bottom: 150px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.first-comment {
+  margin: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.comment-text {
+  margin: 30px;
+}
+
+.comments-container {
+  margin-top: 20px;
+  width: 65vw;
+}
+
+.comments-container-content {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+}
+
+.number-likes {
+  margin-left: 5px;
+  display: flex;
+}
+
+.rating-star {
+  cursor: pointer;
+}

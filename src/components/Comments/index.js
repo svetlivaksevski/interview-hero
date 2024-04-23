@@ -2,11 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
-import { FaRegHeart } from "react-icons/fa6";
-import { FaPencil } from "react-icons/fa6";
-import { FaTrashCan } from "react-icons/fa6";
-import { LiaEdit } from "react-icons/lia";
-import { LiaTrashAltSolid } from "react-icons/lia";
+import {
+  LiaEdit,
+  LiaTrashAltSolid,
+  LiaCommentSlashSolid,
+  LiaHeart,
+  LiaHeartSolid,
+} from "react-icons/lia";
 
 export default function Comments({ params, questionId, mutate }) {
   const { data: session } = useSession();
@@ -81,81 +83,96 @@ export default function Comments({ params, questionId, mutate }) {
   return (
     <div>
       <div className="comments-container">
-        <h2>Comments</h2>
-        {comments.map((comment) => (
-          <div key={comment._id} className="comments-container-content">
-            <div className="comment-profile-info">
-              <img
-                src={comment.profileImage}
-                width={50}
-                className="imagecomment"
-              />
-              <div className="p-comment">
-                <p className="author">{comment.userName}</p>
-                <p className="add-comment">
-                  posted at: {comment.created.substring(0, 10)}
-                </p>
+        <h2 className="comment-text">Comments</h2>
+
+        {comments.length === 0 ? (
+          <span className="first-comment">
+            Be the first to comment!{" "}
+            <LiaCommentSlashSolid fontSize={40} fill="#2b7a78" />
+          </span>
+        ) : (
+          comments.map((comment) => (
+            <div key={comment._id} className="comments-container-content">
+              <div className="comment-profile-info">
+                <img
+                  src={comment.profileImage}
+                  width={50}
+                  className="imagecomment"
+                  alt="profile-photo"
+                />
+                <div className="p-comment">
+                  <p className="author">{comment.userName}</p>
+                  <p className="add-comment">
+                    posted at: {comment.created.substring(0, 10)}
+                  </p>
+                </div>
+              </div>
+              <p>
+                {editedCommentId === comment._id ? (
+                  <textarea
+                    defaultValue={comment.comment}
+                    onChange={(e) => setCommentText(e.target.value)}
+                    maxLength={250}
+                    minLength={2}
+                  />
+                ) : (
+                  comment.comment
+                )}
+                {editedCommentId === comment._id && (
+                  <button
+                    onClick={() => handleSaveEdit(comment._id)}
+                    className="buttons"
+                    disabled={commentText.trim().length === 0}
+                  >
+                    Save
+                  </button>
+                )}
+              </p>
+
+              <div className="dots"></div>
+              <div className="comment-icons">
+                {session && (
+                  <button
+                    className="icons"
+                    onClick={() => handleLike(comment._id)}
+                  >
+                    {comment.likedByUserId.includes(session.user.userId) ? (
+                      <LiaHeartSolid fontSize={20} />
+                    ) : (
+                      <LiaHeart fontSize={20} />
+                    )}
+                    <span className="number-likes">
+                      {comment.likedByUserId.length}
+                    </span>
+                  </button>
+                )}
+                {session?.user.userId === comment?.userId ? (
+                  <>
+                    <button
+                      onClick={() => setEditedCommentId(comment._id)}
+                      className={
+                        editedCommentId === comment._id
+                          ? "icons disabled"
+                          : "icons"
+                      }
+                      disabled={editedCommentId === comment._id}
+                    >
+                      <LiaEdit fontSize={20} />
+                    </button>
+                    <button
+                      onClick={() => deleteComment(comment._id)}
+                      className="icons"
+                    >
+                      <LiaTrashAltSolid fontSize={20} />
+                    </button>
+                  </>
+                ) : (
+                  <p></p>
+                )}
               </div>
             </div>
-            <p>
-              {editedCommentId === comment._id ? (
-                <textarea
-                  defaultValue={comment.comment}
-                  onChange={(e) => setCommentText(e.target.value)}
-                  maxLength={250}
-                  minLength={2}
-                />
-              ) : (
-                comment.comment
-              )}
-              {editedCommentId === comment._id && (
-                <button
-                  onClick={() => handleSaveEdit(comment._id)}
-                  className="buttons"
-                  disabled={commentText.trim().length === 0}
-                >
-                  Save
-                </button>
-              )}
-            </p>
-
-            <div className="dots"></div>
-            <div className="comment-icons">
-              {session && (
-                <button
-                  className="icons"
-                  onClick={() => handleLike(comment._id)}
-                >
-                  <FaRegHeart fontSize={15} />
-                  <p>{comment.likedByUserId.length}</p>
-                </button>
-              )}
-              {session?.user.userId === comment?.userId ? (
-                <>
-                  <button
-                    onClick={() => setEditedCommentId(comment._id)}
-                    className={
-                      editedCommentId === comment._id
-                        ? "icons disabled"
-                        : "icons"
-                    }
-                    disabled={editedCommentId === comment._id}
-                  >
-                    <LiaEdit fontSize={15} />
-                  </button>
-                  <button
-                    onClick={() => deleteComment(comment._id)}
-                    className="icons"
-                  >
-                    <LiaTrashAltSolid fontSize={15} />
-                  </button>
-                </>
-              ) : (
-                <p></p>
-              )}
-            </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
     </div>
   );

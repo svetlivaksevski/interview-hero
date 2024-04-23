@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { mutate } from "swr";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
+import { useSession, signIn } from "next-auth/react";
 
 export default function CommentForm({ questionId }) {
   const { data: session } = useSession();
@@ -55,7 +55,11 @@ export default function CommentForm({ questionId }) {
           </button>
         </form>
       ) : (
-        <p>To leave a comment, please sign up first.</p>
+        <span className="comment-longin">
+          <a onClick={() => signIn()}>
+            To leave a comment, please click here to Sign in first.
+          </a>
+        </span>
       )}
     </>
   );
