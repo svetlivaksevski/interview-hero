@@ -26,20 +26,27 @@ export default function Profile() {
   return (
     <>
       <Header />
-      {session ? (
-        <>
-          <img
-            src={session.user.image}
-            className="profilepicture"
-            alt="Profile"
-          />
-          <h1>You signed up as {session.user.name}</h1>
-          <p>Questions you added so far: {questionsAddedbyYou?.length || 0}</p>
-          <button onClick={() => signOut()}>Sign Out</button>
-        </>
-      ) : (
-        <SignInPage />
-      )}
+      <div className="profile-page">
+        {session ? (
+          <>
+            {" "}
+            <img
+              src={session.user.image}
+              className="profilepicture"
+              alt="Profile"
+            />
+            <h1>You signed up as {session.user.name}</h1>
+            <p>
+              Questions you added so far: {questionsAddedbyYou?.length || 0}
+            </p>
+            <button className="button-profile" onClick={() => signOut()}>
+              Sign Out
+            </button>
+          </>
+        ) : (
+          <SignInPage />
+        )}
+      </div>
       <Navigation />
     </>
   );
