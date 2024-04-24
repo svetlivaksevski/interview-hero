@@ -8,6 +8,7 @@ export default function Home() {
     <main>
       <div className="mainpage">
         <Header />
+        <Randomquestion />
         <h2>What is Interview Hero?</h2>
         <p className="intro-homepage">
           We are an interactive platform on a mission to help people finding
@@ -15,7 +16,6 @@ export default function Home() {
           interview questions, which could increase your performance during the
           interview and increase chances to find the right job.
         </p>
-        <Randomquestion />
         <RecentlyAdded />
         <Navigation />
       </div>

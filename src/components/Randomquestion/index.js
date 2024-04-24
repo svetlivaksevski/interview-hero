@@ -1,8 +1,7 @@
 "use client";
 import useSWR from "swr";
 
-import Image from "next/image";
-import RandomIcon from "@/images/icons/dice-solid.svg";
+import { LiaDiceSolid } from "react-icons/lia";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
@@ -16,10 +15,19 @@ export default function Randomquestion() {
 
   return (
     <div className="randomquestion">
-      <Image src={RandomIcon} width={50} alt="diceicon" />
-      <h2>Random question</h2>
+      <div className="dice-text">
+        <LiaDiceSolid fontSize={60} />
+        <h2>Random question</h2>
+      </div>
       <p>Question: {randomQuestion.question}</p>
       <a href={`question/${randomQuestion._id}`}>Read more... </a>
+
+      <div className="dots-random">
+        <span className="category-q-random">
+          Category:
+          <span className="category-q-cont">{randomQuestion.category}</span>
+        </span>
+      </div>
     </div>
   );
 }

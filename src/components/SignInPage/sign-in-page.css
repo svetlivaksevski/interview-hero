@@ -1,0 +1,21 @@
+.sign-in-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80vw;
+  margin: 170px;
+}
+
+.sign-in-button {
+  border: none;
+  font-size: 16px;
+  background-color: #2b7a78;
+  padding: 10px;
+  color: #feffff;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 5px;
+  margin-top: 15px;
+  width: 20vw;
+}

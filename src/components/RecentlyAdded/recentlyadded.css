@@ -1,0 +1,9 @@
+.slideshow {
+  display: flex;
+}
+
+.arrows {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}

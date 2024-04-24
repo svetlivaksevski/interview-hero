@@ -40,3 +40,49 @@
 .rating-star {
   cursor: pointer;
 }
+
+.imagecomment {
+  border-radius: 100px;
+  width: 40px;
+}
+
+.comment-form {
+  margin-bottom: 100px;
+  margin-top: 20px;
+  flex-direction: column;
+  display: flex;
+}
+
+.comment-section {
+  font-family: "Lora", serif;
+  font-style: italic;
+  font-size: 18px;
+  padding: 40px 70px;
+  border: 1px solid #def2f1;
+}
+
+.author {
+  margin-left: 10px;
+  font-size: 12px;
+}
+
+.comment-profile-info {
+  margin-bottom: 20px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  display: flex;
+}
+
+.add-comment {
+  font-size: 12px;
+  margin-left: 10px;
+  color: #2b7a78;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.p-comment {
+  display: flex;
+  flex-direction: column;
+}

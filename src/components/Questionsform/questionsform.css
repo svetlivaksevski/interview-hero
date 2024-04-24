@@ -1,0 +1,41 @@
+.form-container {
+  display: flex;
+  justify-content: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 30px;
+  gap: 10px;
+
+  background-color: #def2f1;
+  border-radius: 10px;
+  padding: 40px;
+  margin-bottom: 150px;
+}
+
+.textarea-form {
+  border-radius: 10px;
+  border: none;
+  font-family: "Zilla Slab", serif;
+  font-size: 16px;
+  padding: 20px 30px;
+}
+
+.category-form {
+  border: 1px solid #def2f1;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.textarea-text {
+  font-size: 18px;
+  color: #3aafa9;
+}
+
+.text-form {
+  font-family: "Zilla Slab", serif;
+  margin-bottom: 10px;
+}

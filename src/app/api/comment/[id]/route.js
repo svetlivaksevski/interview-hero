@@ -25,7 +25,6 @@ export async function POST(request, { params }) {
       questionId: id,
       userName: session.user.name,
       profileImage: session.user.image,
-      userId: session.user.userId,
     });
 
     return NextResponse.json({ entryData }, { status: 201 });
