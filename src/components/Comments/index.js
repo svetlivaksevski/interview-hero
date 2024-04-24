@@ -15,7 +15,9 @@ export default function Comments({ params, questionId, mutate }) {
 
   const [editedCommentId, setEditedCommentId] = useState(null);
   const [commentText, setCommentText] = useState("");
+
   const [comments, setComments] = useState([]);
+
   const id = params;
 
   useEffect(() => {
@@ -41,7 +43,8 @@ export default function Comments({ params, questionId, mutate }) {
   }
 
   async function handleSaveEdit(id) {
-    if (!editedCommentId) return;
+    const trimmedCommentText = commentText.trim();
+    if (!editedCommentId || !trimmedCommentText) return;
 
     const response = await fetch(`/api/comment/${id}`, {
       method: "PUT",
@@ -80,6 +83,11 @@ export default function Comments({ params, questionId, mutate }) {
     }
   }
 
+  function handleCancelEdit() {
+    setEditedCommentId(null);
+    setCommentText("");
+  }
+
   return (
     <div>
       <div className="comments-container">
@@ -87,7 +95,7 @@ export default function Comments({ params, questionId, mutate }) {
 
         {comments.length === 0 ? (
           <span className="first-comment">
-            Be the first to comment!{" "}
+            Be the first to comment!
             <LiaCommentSlashSolid fontSize={40} fill="#2b7a78" />
           </span>
         ) : (
@@ -101,17 +109,17 @@ export default function Comments({ params, questionId, mutate }) {
                   alt="profile-photo"
                 />
                 <div className="p-comment">
-                  <p className="author">{comment.userName}</p>
-                  <p className="add-comment">
+                  <div className="author">{comment.userName}</div>
+                  <div className="add-comment">
                     posted at: {comment.created.substring(0, 10)}
-                  </p>
+                  </div>
                 </div>
               </div>
-              <p>
+              <div>
                 {editedCommentId === comment._id ? (
                   <textarea
                     defaultValue={comment.comment}
-                    onChange={(e) => setCommentText(e.target.value)}
+                    onChange={(e) => setCommentText(e.target.value.trim())}
                     maxLength={250}
                     minLength={2}
                   />
@@ -119,15 +127,19 @@ export default function Comments({ params, questionId, mutate }) {
                   comment.comment
                 )}
                 {editedCommentId === comment._id && (
-                  <button
-                    onClick={() => handleSaveEdit(comment._id)}
-                    className="buttons"
-                    disabled={commentText.trim().length === 0}
-                  >
-                    Save
-                  </button>
+                  <div>
+                    <button
+                      onClick={() => handleSaveEdit(comment._id)}
+                      className="buttons"
+                    >
+                      Save
+                    </button>
+                    <button onClick={handleCancelEdit} className="buttons">
+                      Cancel
+                    </button>
+                  </div>
                 )}
-              </p>
+              </div>
 
               <div className="dots"></div>
               <div className="comment-icons">

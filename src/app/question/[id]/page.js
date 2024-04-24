@@ -9,9 +9,7 @@ import Comments from "@/components/Comments";
 import CommentForm from "@/components/CommentForm";
 import { LiaEdit } from "react-icons/lia";
 import { LiaTrashAltSolid } from "react-icons/lia";
-import { FaRegStar } from "react-icons/fa";
-import { FaStarHalfAlt } from "react-icons/fa";
-import { FaStar } from "react-icons/fa";
+import { FaRegStar, FaStarHalfAlt, FaStar } from "react-icons/fa";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
@@ -86,8 +84,6 @@ export default function QuestionPage({ params }) {
   return (
     <>
       <Header />
-
-      {/* <span onClick={() => window.history.back()}>← Go back</span> */}
       <div className="container-questions">
         <div className="user-info-text">
           <img src={data.profileImage} className="imagequestion" />

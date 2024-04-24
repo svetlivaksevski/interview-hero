@@ -7,13 +7,27 @@ import { useSession, signIn } from "next-auth/react";
 
 export default function CommentForm({ questionId }) {
   const { data: session } = useSession();
-  const [comment, setComment] = useState("");
+  // const [comment, setComment] = useState("");
   const router = useRouter();
+
   const handleSubmit = (event) => {
+    event.preventDefault();
+
     const formData = new FormData(event.target);
-    const comment = Object.fromEntries(formData);
-    const commentWithUser = { ...comment, userId: session.user.userId };
+    const data = Object.fromEntries(formData);
+
+    const trimmedComment = data.comment.trim();
+
+    if (trimmedComment.length < 1) {
+      return;
+    }
+    const commentWithUser = {
+      comment: trimmedComment,
+      userId: session.user.userId,
+    };
     AddComment(commentWithUser);
+
+    event.target.reset();
   };
   async function AddComment(entryData) {
     try {
@@ -32,7 +46,6 @@ export default function CommentForm({ questionId }) {
       if (!response.ok) {
         throw new Error("Error submitting comment");
       }
-      setComment("");
     } catch (error) {
       console.error(error);
     }
@@ -47,6 +60,7 @@ export default function CommentForm({ questionId }) {
             type="text"
             placeholder="Enter your comment..."
             className="comment-section"
+            maxLength={500}
             required
           />
 

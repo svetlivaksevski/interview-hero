@@ -1,6 +1,10 @@
 @import "../app/question/question.css";
 @import "./api/../../components/Comments/comments.css";
 @import "./profile/profile.css";
+@import "./../components/Questionsform/questionsform.css";
+@import "../components/SignInPage/sign-in-page.css";
+@import "./../components/RecentlyAdded/recentlyadded.css";
+@import "./../components/Randomquestion/randomquestion.css";
 
 .navigation {
   display: flex;
@@ -12,7 +16,7 @@
   background-color: #feffff;
   bottom: 0;
   margin-bottom: 0;
-  border-top: 1px solid #def2f1;
+  background-color: #f9f9f9;
 }
 
 a {
@@ -58,14 +62,6 @@ a {
   padding-bottom: 20px;
 }
 
-.randomquestion {
-  padding: 50px;
-  border-style: dashed;
-  border-radius: 10px;
-  margin: 10px;
-  width: 550px;
-}
-
 .container {
   margin-bottom: 100px;
 }
@@ -73,14 +69,6 @@ a {
 .container-questions-list-recently {
   margin-bottom: 100px;
   margin-top: 20px;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 30px;
-  gap: 10px;
 }
 
 .intro-homepage {
@@ -115,6 +103,7 @@ input {
   border-radius: 40px;
   padding: 12px 70px;
   background-image: url("../images/icons/magnifying-glass-solid.svg");
+
   background-position: 15px 14px;
   background-repeat: no-repeat;
   background-size: 20px;
@@ -165,52 +154,6 @@ input {
   margin-bottom: 10px;
   border-top: 1px solid rgb(200, 200, 200);
   flex-wrap: wrap;
-}
-
-.imagecomment {
-  border-radius: 100px;
-  width: 40px;
-}
-
-.comment-form {
-  margin-bottom: 100px;
-  margin-top: 20px;
-  flex-direction: column;
-  display: flex;
-}
-
-.comment-section {
-  font-family: "Lora", serif;
-  font-style: italic;
-  font-size: 18px;
-  padding: 40px 70px;
-  border: 1px solid #def2f1;
-}
-
-.author {
-  margin-left: 10px;
-  font-size: 12px;
-}
-
-.comment-profile-info {
-  margin-bottom: 20px;
-  align-items: center;
-  justify-content: flex-start;
-  flex-direction: row;
-  display: flex;
-}
-
-.add-comment {
-  font-size: 12px;
-  margin-left: 10px;
-  color: #2b7a78;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.p-comment {
-  display: flex;
-  flex-direction: column;
 }
 
 .container-category {

@@ -13,6 +13,7 @@ import {
   LiaGlobeEuropeSolid,
   LiaBarsSolid,
 } from "react-icons/lia";
+import { FaRegStar, FaStarHalfAlt, FaStar } from "react-icons/fa";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
@@ -83,7 +84,7 @@ export default function QuestionPage() {
               </p>
             </div>
             <div
-              onClick={() => handleCategorySelect("Compensation and Benefits")}
+              onClick={() => handleCategorySelect("Compensation & Benefits")}
             >
               <p className="icons-container">
                 <LiaMoneyBillWaveAltSolid className="icons" fontSize={25} />{" "}
@@ -91,9 +92,7 @@ export default function QuestionPage() {
               </p>
             </div>
             <div
-              onClick={() =>
-                handleCategorySelect("Professional Development and Growth")
-              }
+              onClick={() => handleCategorySelect("Professional Development")}
             >
               <p className="icons-container">
                 <LiaGraduationCapSolid className="icons" fontSize={25} />
