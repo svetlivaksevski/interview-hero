@@ -120,11 +120,14 @@ input {
 .showmore {
   font-family: "Lora", serif;
   font-style: italic;
+  flex-direction: column;
   font-size: 16px;
   color: #17252a;
   display: flex;
   justify-content: center;
   cursor: pointer;
+  align-items: center;
+  gap: 5px;
 }
 
 .container-questions {
