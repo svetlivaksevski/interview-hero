@@ -12,8 +12,8 @@ import {
   LiaClipboardListSolid,
   LiaGlobeEuropeSolid,
   LiaBarsSolid,
+  LiaAngleDownSolid,
 } from "react-icons/lia";
-import { FaRegStar, FaStarHalfAlt, FaStar } from "react-icons/fa";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
@@ -125,9 +125,9 @@ export default function QuestionPage() {
             {filteredCategoryQuestions.length} available results
           </form>
           {error ? (
-            <div>Failed to load</div>
+            <div className="noresult">Failed to load</div>
           ) : isLoading ? (
-            <div>Loading questions...</div>
+            <div className="noresult">Loading questions...</div>
           ) : (
             <div>
               {filteredCategoryQuestions.length > 0 ? (
@@ -150,25 +150,28 @@ export default function QuestionPage() {
                       </div>
                     </a>
                   ))}
-                  {filteredCategoryQuestions.length > displayCount && (
-                    <span className="showmore" onClick={handleShowMore}>
-                      Show more
-                    </span>
-                  )}
                 </div>
               ) : (
                 <>
                   {(filteredQuestions.length === 0 ? (
-                    <h2>There were no results found for {searchTerm}</h2>
+                    <h2 className="noresult">
+                      There were no results found for {searchTerm}
+                    </h2>
                   ) : null) ??
                     (filteredCategoryQuestions.length === 0 && (
-                      <h2>
+                      <h2 className="noresult">
                         No questions have been added to this category yet.
                       </h2>
                     ))}
                 </>
               )}
             </div>
+          )}
+          {filteredCategoryQuestions.length > displayCount && (
+            <span className="showmore" onClick={handleShowMore}>
+              Show more
+              <LiaAngleDownSolid />
+            </span>
           )}
         </div>
       </main>
