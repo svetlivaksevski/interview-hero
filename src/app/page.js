@@ -8,16 +8,18 @@ export default function Home() {
     <main>
       <div className="mainpage">
         <Header />
-        <Randomquestion />
-        <h2>What is Interview Hero?</h2>
-        <p className="intro-homepage">
-          We&apos;re here to help you find your dream job! Our platform provides
-          practical advice and tips for acing your interviews. With our
-          guidance, you&apos;ll boost your confidence, perform better in
-          interviews, and increase your chances of landing the right job for
-          you.
-        </p>
+        <div className="intro-container">
+          <div className="styling-text-h1">What is Interview Hero?</div>
+          <p className="intro-homepage">
+            We&apos;re here to help you find your dream job! Our platform
+            provides practical advice and tips for acing your interviews. With
+            our guidance, you&apos;ll boost your confidence, perform better in
+            interviews, and increase your chances of landing the right job for
+            you.
+          </p>
+        </div>
         <RecentlyAdded />
+        <Randomquestion />
         <Navigation />
       </div>
     </main>

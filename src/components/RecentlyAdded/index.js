@@ -30,19 +30,24 @@ export default function RecentlyAdded() {
 
   return (
     <main>
-      <h1>Recently added</h1>
+      <div className="styling-text-h1">Recently added</div>
       <div className="container-questions-list-recently">
         <div className="slideshow">
           <div className="arrows" onClick={handlePrev}>
-            <LiaAngleLeftSolid fontSize={70} />
+            <LiaAngleLeftSolid fontSize={70} fill="#2b7a78" />
           </div>
           <div>
-            <a href={`question/${limitedData[currentIndex]._id}`}>
+            <a
+              className="recentlyadded-link"
+              href={`question/${limitedData[currentIndex]._id}`}
+            >
               <div
                 className="container-recently-list"
                 key={limitedData[currentIndex]._id}
               >
-                <h2>Question asked during interview:</h2>
+                <h2 className="questions-recently">
+                  Question asked during interview:
+                </h2>
                 <p>{limitedData[currentIndex].question}</p>
                 <p className="seetheanswer">Click here to see the answer...</p>
                 <div className="dots"></div>
@@ -56,7 +61,7 @@ export default function RecentlyAdded() {
             </a>
           </div>
           <div className="arrows" onClick={handleNext}>
-            <LiaAngleRightSolid fontSize={70} />
+            <LiaAngleRightSolid fontSize={70} fill="#2b7a78" />
           </div>
         </div>
       </div>

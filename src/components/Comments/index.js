@@ -195,12 +195,6 @@ export default function Comments({ params, questionId, mutate }) {
                     >
                       <LiaTrashAltSolid fontSize={20} />
                     </button>
-                    {comment.length > displayCount && (
-                      <span className="showmore" onClick={handleShowMore}>
-                        Show more
-                        <LiaAngleDownSolid />
-                      </span>
-                    )}
                   </>
                 ) : (
                   <p></p>
@@ -208,6 +202,12 @@ export default function Comments({ params, questionId, mutate }) {
               </div>
             </div>
           ))
+        )}
+        {comments.length > displayCount && (
+          <span className="showmore" onClick={handleShowMore}>
+            Show more
+            <LiaAngleDownSolid />
+          </span>
         )}
       </div>
     </div>

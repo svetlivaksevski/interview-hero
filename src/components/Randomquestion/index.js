@@ -14,21 +14,23 @@ export default function Randomquestion() {
   const randomQuestion = data[Math.floor(Math.random() * (data.length - 1))];
 
   return (
-    <div className="randomquestion">
-      <div className="dice-text">
-        <LiaDiceSolid fontSize={60} />
-        <h2>Random question</h2>
-      </div>
-      <p>Question: {randomQuestion.question}</p>
-      <a href={`question/${randomQuestion._id}`}>
-        Click here to see the answer...
-      </a>
+    <div className="randomquestion-container">
+      <div className="randomquestion">
+        <div className="dice-text">
+          <LiaDiceSolid fontSize={60} />
+          <div className="styling-text-h1">Random question</div>
+        </div>
+        <p>Question: {randomQuestion.question}</p>
+        <a href={`question/${randomQuestion._id}`}>
+          Click here to see the answer...
+        </a>
 
-      <div className="dots-random">
-        <span className="category-q-random">
-          Category:
-          <span className="category-q-cont">{randomQuestion.category}</span>
-        </span>
+        <div className="dots-random">
+          <span className="category-q-random">
+            Category:
+            <span className="category-q-cont">{randomQuestion.category}</span>
+          </span>
+        </div>
       </div>
     </div>
   );
