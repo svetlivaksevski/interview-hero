@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import {
   LiaEdit,
   LiaTrashAltSolid,
-  LiaCommentSlashSolid,
+  LiaCommentAlt,
   LiaHeart,
   LiaHeartSolid,
   LiaAngleDownSolid,
@@ -102,7 +102,7 @@ export default function Comments({ params, questionId, mutate }) {
         {comments.length === 0 ? (
           <span className="first-comment">
             Be the first to comment!
-            <LiaCommentSlashSolid fontSize={40} fill="#2b7a78" />
+            <LiaCommentAlt fontSize={40} fill="#2b7a78" />
           </span>
         ) : (
           comments.slice(0, displayCount).map((comment) => (
