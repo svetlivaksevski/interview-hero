@@ -7,3 +7,31 @@
   align-items: center;
   cursor: pointer;
 }
+
+.container-questions-list-recently {
+  margin-top: 20px;
+  background-color: #def2f1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.recentlyadded-link {
+  display: flex;
+  justify-content: center;
+}
+
+.heading-recentlyadded {
+  font-size: 24px;
+  color: #3aafa9;
+  padding: 10px;
+  font-family: "Zilla Slab", serif;
+  display: flex;
+  justify-content: center;
+}
+
+.questions-recently {
+  color: rgb(77, 77, 77);
+  font-size: 22px;
+  font-family: "Zilla Slab", serif;
+}
