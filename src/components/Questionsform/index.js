@@ -13,25 +13,25 @@ export default function QuestionsForm({
   successEdit,
 }) {
   const session = useSession();
-  const [formData, setFormData] = useState({
-    question: defaultData?.question || "",
-    answer: defaultData?.answer || "",
-    category: defaultData?.category || "",
-    difficulty: defaultData?.difficulty || "",
-  });
+  const [inputError, setInputError] = useState("");
+  const [question, setQuestion] = useState(defaultData?.question || "");
+  const [answer, setAnswer] = useState(defaultData?.answer || "");
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value.trim(),
-    });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (question.trim() === "" || answer.trim() === "") {
+      setInputError(
+        "You need to fill in both inputs to be able to send the form."
+      );
+      return;
+    }
+    onSubmit(e);
   };
 
   return (
     <div className="form-container">
       {session.status === "authenticated" ? (
-        <form className="form" aria-labelledby="Form" onSubmit={onSubmit}>
+        <form className="form" aria-labelledby="Form" onSubmit={handleSubmit}>
           <h1 className="text-form">
             {defaultData ? "Edit question" : "Add question"}
           </h1>
@@ -46,9 +46,8 @@ export default function QuestionsForm({
             rows="5"
             cols="30"
             maxLength={350}
-            defaultValue={defaultData?.question}
-            onChange={handleInputChange}
-            value={formData.question}
+            value={question}
+            onChange={(e) => setQuestion(e.target.value)}
           />
           <label htmlFor="answer" className="textarea-text">
             Your answer:
@@ -62,9 +61,8 @@ export default function QuestionsForm({
             rows="5"
             cols="30"
             maxLength={500}
-            defaultValue={defaultData?.answer}
-            onChange={handleInputChange}
-            value={formData.answer}
+            value={answer}
+            onChange={(e) => setAnswer(e.target.value)}
           />
           <label htmlFor="select">Select question category:</label>
           <div className="custom-select">
@@ -110,10 +108,23 @@ export default function QuestionsForm({
           <button className="buttons" type="submit">
             Submit
           </button>
-          {errorMessage && <p>{errorMessage}</p>}
-          {successMessage && <p>{successMessage}</p>}
-          {successEdit && <p>{successEdit}</p>}
-          {failedSubmission && <p>{failedSubmission}</p>}
+          <div className="form-submission-messages">
+            {inputError &&
+              !errorMessage &&
+              !successMessage &&
+              !successEdit &&
+              !failedSubmission && (
+                <p className="input-error-message">{inputError}</p>
+              )}
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
+            {successMessage && (
+              <p className="success-message">{successMessage}</p>
+            )}
+            {successEdit && <p className="success-message">{successEdit}</p>}
+            {failedSubmission && (
+              <p className="error-message">{failedSubmission}</p>
+            )}
+          </div>
         </form>
       ) : (
         <SignInPage />

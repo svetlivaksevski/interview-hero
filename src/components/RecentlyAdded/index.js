@@ -22,7 +22,11 @@ export default function RecentlyAdded() {
 
   if (isLoading || error) return <h2>Loading...</h2>;
 
-  const limitedData = data.slice(0, 5);
+  const sortedData = data.sort(
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+  );
+
+  const limitedData = sortedData.slice(0, 5);
 
   return (
     <main>

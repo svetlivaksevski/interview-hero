@@ -20,7 +20,9 @@ export default function Randomquestion() {
         <h2>Random question</h2>
       </div>
       <p>Question: {randomQuestion.question}</p>
-      <a href={`question/${randomQuestion._id}`}>Read more... </a>
+      <a href={`question/${randomQuestion._id}`}>
+        Click here to see the answer...
+      </a>
 
       <div className="dots-random">
         <span className="category-q-random">

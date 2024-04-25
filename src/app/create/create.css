@@ -1,0 +1,23 @@
+.input-error-message {
+  background-color: #f5d198;
+  border: 1px solid #c47726;
+  color: #c47726;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.error-message {
+  background-color: #f5d198;
+  border: 1px solid #c47726;
+  color: #c47726;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.success-message {
+  background-color: #d8f5c0;
+  border: 1px solid #1d9b93;
+  color: #1d9b93;
+  padding: 10px;
+  border-radius: 10px;
+}
