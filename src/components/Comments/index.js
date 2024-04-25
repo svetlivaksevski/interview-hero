@@ -8,6 +8,7 @@ import {
   LiaCommentSlashSolid,
   LiaHeart,
   LiaHeartSolid,
+  LiaAngleDownSolid,
 } from "react-icons/lia";
 
 export default function Comments({ params, questionId, mutate }) {
@@ -15,6 +16,7 @@ export default function Comments({ params, questionId, mutate }) {
 
   const [editedCommentId, setEditedCommentId] = useState(null);
   const [commentText, setCommentText] = useState("");
+  const [displayCount, setDisplayCount] = useState(5);
 
   const [comments, setComments] = useState([]);
 
@@ -88,6 +90,10 @@ export default function Comments({ params, questionId, mutate }) {
     setCommentText("");
   }
 
+  const handleShowMore = () => {
+    setDisplayCount(displayCount + 5);
+  };
+
   return (
     <div>
       <div className="comments-container">
@@ -99,15 +105,26 @@ export default function Comments({ params, questionId, mutate }) {
             <LiaCommentSlashSolid fontSize={40} fill="#2b7a78" />
           </span>
         ) : (
-          comments.map((comment) => (
+          comments.slice(0, displayCount).map((comment) => (
             <div key={comment._id} className="comments-container-content">
               <div className="comment-profile-info">
-                <img
-                  src={comment.profileImage}
-                  width={50}
-                  className="imagecomment"
-                  alt="profile-photo"
-                />
+                {comment.userId === session.user.userId ? (
+                  <a href="/profile">
+                    <img
+                      src={comment.profileImage}
+                      width={50}
+                      className="imagecomment"
+                      alt="profile-photo"
+                    />
+                  </a>
+                ) : (
+                  <img
+                    src={comment.profileImage}
+                    width={50}
+                    className="imagecomment"
+                    alt="profile-photo"
+                  />
+                )}
                 <div className="p-comment">
                   <div className="author">{comment.userName}</div>
                   <div className="add-comment">
@@ -178,6 +195,12 @@ export default function Comments({ params, questionId, mutate }) {
                     >
                       <LiaTrashAltSolid fontSize={20} />
                     </button>
+                    {comment.length > displayCount && (
+                      <span className="showmore" onClick={handleShowMore}>
+                        Show more
+                        <LiaAngleDownSolid />
+                      </span>
+                    )}
                   </>
                 ) : (
                   <p></p>
