@@ -108,7 +108,7 @@ export default function Comments({ params, questionId, mutate }) {
           comments.slice(0, displayCount).map((comment) => (
             <div key={comment._id} className="comments-container-content">
               <div className="comment-profile-info">
-                {comment.userId === session.user.userId ? (
+                {comment.userId === session?.user.userId ? (
                   <a href="/profile">
                     <img
                       src={comment.profileImage}
