@@ -2,14 +2,24 @@
 import { useEffect } from "react";
 import { useSession, signOut } from "next-auth/react";
 import useSWR from "swr";
+import { useState } from "react";
 import SignInPage from "@/components/SignInPage";
 import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
+import {
+  LiaListSolid,
+  LiaAngleDownSolid,
+  LiaGrinHearts,
+  LiaMeh,
+  LiaSadCry,
+} from "react-icons/lia";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Profile() {
   const { data: session } = useSession();
+  const [displayCount, setDisplayCount] = useState(5);
+  const [badges, setBadges] = useState("");
 
   const { data, error } = useSWR("/api/question", fetcher);
 
@@ -22,6 +32,24 @@ export default function Profile() {
   const questionsAddedbyYou = data?.filter(
     (info) => info.userId === session?.user.userId
   );
+
+  const handleShowMore = () => {
+    setDisplayCount(displayCount + 5);
+  };
+
+  const displayBadge = () => {
+    if (questionsAddedbyYou?.length <= 5) {
+      setBadges("Unemployed");
+    } else if (questionsAddedbyYou?.length <= 10) {
+      setBadges("Possible hire");
+    } else if (questionsAddedbyYou?.length <= 20) {
+      setBadges("Hiring managers dream");
+    }
+  };
+
+  useEffect(() => {
+    displayBadge();
+  }, [questionsAddedbyYou]);
 
   return (
     <>
@@ -37,18 +65,41 @@ export default function Profile() {
             <h1 className="profile-info">
               You signed up as {session.user.name}
             </h1>
-            <p className="your-questions">
-              Questions you&apos;ve added so far:
-            </p>
-            <p>{questionsAddedbyYou?.length || 0}</p>
+
             <button className="button-profile" onClick={() => signOut()}>
               Sign Out
             </button>
+            <div className="badge-container">
+              Your current badge is:
+              {badges === "Unemployed" && (
+                <div className="badges">
+                  <LiaSadCry fontSize={50} />
+                  <p>Unemployed</p>
+                </div>
+              )}
+              {badges === "Possible hire" && (
+                <div className="badges">
+                  <LiaMeh fontSize={50} />
+                  <p>Possible hire</p>
+                </div>
+              )}
+              {badges === "Hiring managers dream" && (
+                <div className="badges">
+                  <LiaGrinHearts fontSize={50} /> <p>Hiring managers dream</p>
+                </div>
+              )}
+              <div className="dots-random"></div>
+              <p className="your-questions">
+                Questions you&apos;ve added so far:
+              </p>
+              <p>{questionsAddedbyYou?.length || 0}</p>
+            </div>
             <div className="your-questions-list">
               <div className="questions-added-by-you-text">
+                <LiaListSolid />
                 Questions added by you:
               </div>
-              {questionsAddedbyYou?.map((q) => (
+              {questionsAddedbyYou?.slice(0, displayCount).map((q) => (
                 <div className="added-by-you" key={q._id}>
                   <a className="added-by-you-link" href={`/question/${q._id}`}>
                     {q.question}
@@ -56,6 +107,12 @@ export default function Profile() {
                   <div className="dots"></div>
                 </div>
               ))}
+              {questionsAddedbyYou?.length > displayCount && (
+                <span className="showmore" onClick={handleShowMore}>
+                  Show more
+                  <LiaAngleDownSolid />
+                </span>
+              )}
             </div>
           </>
         ) : (

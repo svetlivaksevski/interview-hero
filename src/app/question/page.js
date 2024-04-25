@@ -117,10 +117,12 @@ export default function QuestionPage() {
               onChange={handleSearchChange}
               placeholder="Search questions..."
             />
-            <p>
-              You are currently at the category:
+            <span className="current-category-text">
+              You are currently at the category:{" "}
+            </span>
+            <span className="category-itself-text">
               {selectedCategory !== null ? selectedCategory : "All questions"}
-            </p>
+            </span>
             <h2>Search Results</h2>
             {filteredCategoryQuestions.length} available results
           </form>
