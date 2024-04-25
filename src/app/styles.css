@@ -18,16 +18,19 @@
   bottom: 0;
   margin-bottom: 0;
   background-color: #f9f9f9;
+  padding-bottom: 10px;
+  padding-top: 10px;
 }
 
 a {
   text-decoration: none;
+}
+
+.nav-icons-text {
   display: flex;
+  text-decoration: none;
   flex-direction: column;
   align-items: center;
-
-  padding-bottom: 10px;
-  padding-top: 10px;
   color: rgb(117, 117, 117);
   font-size: 14px;
 }
@@ -79,11 +82,6 @@ a {
   border-radius: 10px;
 }
 
-.profilepicture {
-  border-radius: 100px;
-  width: 150px;
-}
-
 .container-recently-list {
   display: flex;
   flex-direction: column;
@@ -95,7 +93,7 @@ a {
 }
 
 input {
-  font-family: "Lora", serif;
+  font-family: "Zilla Slab", serif;
   font-style: italic;
   font-size: 18px;
   margin-top: 20px;
@@ -117,7 +115,7 @@ input {
 }
 
 .showmore {
-  font-family: "Lora", serif;
+  font-family: "Zilla Slab", serif;
   font-style: italic;
   flex-direction: column;
   font-size: 16px;

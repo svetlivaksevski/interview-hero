@@ -29,19 +29,34 @@ export default function Profile() {
       <div className="profile-page">
         {session ? (
           <>
-            {" "}
             <img
               src={session.user.image}
               className="profilepicture"
               alt="Profile"
             />
-            <h1>You signed up as {session.user.name}</h1>
-            <p>
-              Questions you added so far: {questionsAddedbyYou?.length || 0}
+            <h1 className="profile-info">
+              You signed up as {session.user.name}
+            </h1>
+            <p className="your-questions">
+              Questions you&apos;ve added so far:
             </p>
+            <p>{questionsAddedbyYou?.length || 0}</p>
             <button className="button-profile" onClick={() => signOut()}>
               Sign Out
             </button>
+            <div className="your-questions-list">
+              <div className="questions-added-by-you-text">
+                Questions added by you:
+              </div>
+              {questionsAddedbyYou?.map((q) => (
+                <div className="added-by-you" key={q._id}>
+                  <a className="added-by-you-link" href={`/question/${q._id}`}>
+                    {q.question}
+                  </a>
+                  <div className="dots"></div>
+                </div>
+              ))}
+            </div>
           </>
         ) : (
           <SignInPage />
