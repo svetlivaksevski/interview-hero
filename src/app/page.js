@@ -11,10 +11,10 @@ export default function Home() {
         <Randomquestion />
         <h2>What is Interview Hero?</h2>
         <p className="intro-homepage">
-          We are an interactive platform on a mission to help people finding
-          their dream job. How? By providing tips and tricks how to answer your
-          interview questions, which could increase your performance during the
-          interview and increase chances to find the right job.
+          We're here to help you find your dream job! Our platform provides
+          practical advice and tips for acing your interviews. With our
+          guidance, you'll boost your confidence, perform better in interviews,
+          and increase your chances of landing the right job for you.{" "}
         </p>
         <RecentlyAdded />
         <Navigation />

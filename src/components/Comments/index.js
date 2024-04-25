@@ -120,8 +120,9 @@ export default function Comments({ params, questionId, mutate }) {
                   <textarea
                     defaultValue={comment.comment}
                     onChange={(e) => setCommentText(e.target.value.trim())}
-                    maxLength={250}
+                    maxLength={500}
                     minLength={2}
+                    className="edit-textarea"
                   />
                 ) : (
                   comment.comment

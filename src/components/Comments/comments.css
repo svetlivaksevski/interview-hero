@@ -59,6 +59,7 @@
   font-size: 18px;
   padding: 40px 70px;
   border: 1px solid #def2f1;
+  border-radius: 10px;
 }
 
 .author {
@@ -85,4 +86,13 @@
 .p-comment {
   display: flex;
   flex-direction: column;
+}
+
+.edit-textarea {
+  font-family: "Lora", serif;
+  font-style: italic;
+  font-size: 16px;
+  padding: 50px 30px;
+  border: 1px solid #def2f1;
+  border-radius: 10px;
 }
