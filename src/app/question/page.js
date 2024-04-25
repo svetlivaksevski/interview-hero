@@ -135,8 +135,12 @@ export default function QuestionPage() {
               {filteredCategoryQuestions.length > 0 ? (
                 <div className="questions-container">
                   {filteredCategoryQuestions.slice(0, displayCount).map((q) => (
-                    <a href={`question/${q._id}`} key={q._id}>
-                      <div className="container-questions-list">
+                    <a
+                      className="container-questions-list"
+                      href={`question/${q._id}`}
+                      key={q._id}
+                    >
+                      <div>
                         <h2>Question asked during interview:</h2>
                         <p>{q.question}</p>
 
