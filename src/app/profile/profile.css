@@ -28,10 +28,6 @@
   margin-top: 15px;
 }
 
-.your-questions {
-  font-size: 14px;
-}
-
 .your-questions-list {
   padding-bottom: 110px;
   display: flex;
@@ -63,16 +59,32 @@
   font-weight: lighter;
 }
 
+.badges-level {
+  font-size: 16px;
+  padding: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.badges-level-currently {
+  font-weight: bold;
+  font-size: 16px;
+}
+
 .badge-container {
   padding: 30px;
   width: 100%;
   display: flex;
-  font-size: 20px;
+
   margin: 30px;
-  font-family: "Zilla Slab", serif;
-  color: #3aafa9;
-  font-weight: bold;
   flex-direction: column;
   align-items: center;
   background-color: #def2f1;
+}
+
+.badge {
+  font-family: "Zilla Slab", serif;
+  color: #3aafa9;
+  font-weight: bold;
+  font-size: 20px;
 }

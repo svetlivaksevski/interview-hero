@@ -70,29 +70,51 @@ export default function Profile() {
               Sign Out
             </button>
             <div className="badge-container">
-              Your current badge is:
               {badges === "Unemployed" && (
                 <div className="badges">
-                  <LiaSadCry fontSize={50} />
-                  <p>Unemployed</p>
+                  <LiaSadCry fontSize={60} />
+                  <p className="badge">Unemployed</p>
+                  <p className="badges-level">
+                    Stop being looser! Unlock a new badge by reaching 5
+                    questions added.
+                  </p>
+                  <p className="badges-level-currently">
+                    Currently, you&apos;ve added{" "}
+                    {questionsAddedbyYou?.length || 0}.
+                  </p>
                 </div>
               )}
               {badges === "Possible hire" && (
                 <div className="badges">
-                  <LiaMeh fontSize={50} />
-                  <p>Possible hire</p>
+                  <LiaMeh fontSize={60} />
+                  <p className="badge">Possible hire</p>
+                  <div className="dots-random"></div>
+                  <p className="badges-level">
+                    You&apos;re on the right track! Reach 11 questions to unlock
+                    a new badge.
+                  </p>
+                  <p className="badges-level-currently">
+                    Currently, you&apos;ve added{" "}
+                    {questionsAddedbyYou?.length || 0} questions.
+                  </p>
                 </div>
               )}
               {badges === "Hiring managers dream" && (
                 <div className="badges">
-                  <LiaGrinHearts fontSize={50} /> <p>Hiring managers dream</p>
+                  <LiaGrinHearts fontSize={60} />{" "}
+                  <p className="badge">Hiring managers dream</p>
+                  <div className="dots-random"></div>
+                  <p className="badges-level">
+                    What a star! You&apos;ve reached the highest badge. Keep
+                    creating new questions!
+                  </p>
+                  <p className="badges-level-currently">
+                    {" "}
+                    Currently, you&apos;ve added{" "}
+                    {questionsAddedbyYou?.length || 0} questions.
+                  </p>
                 </div>
               )}
-              <div className="dots-random"></div>
-              <p className="your-questions">
-                Questions you&apos;ve added so far:
-              </p>
-              <p>{questionsAddedbyYou?.length || 0}</p>
             </div>
             <div className="your-questions-list">
               <div className="questions-added-by-you-text">
