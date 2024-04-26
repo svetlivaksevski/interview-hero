@@ -51,9 +51,7 @@ export default function CreateEntryPage() {
       setErrorMessage("");
       setSuccessMessage("Yes! You have added this question successfully!");
       setfailedSubmission("");
-      setTimeout(() => {
-        router.push("/question");
-      }, 1000);
+      router.push("/question");
     }
   }
   return (
