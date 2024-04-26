@@ -15,23 +15,23 @@ export default function Randomquestion() {
 
   return (
     <div className="randomquestion-container">
-      <div className="randomquestion">
-        <div className="dice-text">
-          <LiaDiceSolid fontSize={60} />
-          <div className="styling-text-h1">Random question</div>
-        </div>
-        <p>Question: {randomQuestion.question}</p>
-        <a href={`question/${randomQuestion._id}`}>
-          Click here to see the answer...
-        </a>
+      <a href={`question/${randomQuestion._id}`}>
+        <div className="randomquestion">
+          <div className="dice-text">
+            <LiaDiceSolid fontSize={60} />
+            <div className="styling-text-h1">Random question</div>
+          </div>
+          <p>{randomQuestion.question}</p>
+          <span className="seetheanswer">Click here to see the answer...</span>
 
-        <div className="dots-random">
-          <span className="category-q-random">
-            Category:
-            <span className="category-q-cont">{randomQuestion.category}</span>
-          </span>
+          <div className="dots-random">
+            <span className="category-q-random">
+              Category:
+              <span className="category-q-cont">{randomQuestion.category}</span>
+            </span>
+          </div>
         </div>
-      </div>
+      </a>
     </div>
   );
 }
