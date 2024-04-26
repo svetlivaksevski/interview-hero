@@ -75,7 +75,7 @@ export default function Profile() {
                   <LiaSadCry fontSize={60} />
                   <p className="badge">Unemployed</p>
                   <p className="badges-level">
-                    Stop being looser! Unlock a new badge by reaching 5
+                    Stop being a looser! Unlock a new badge by reaching 5
                     questions added.
                   </p>
                   <p className="badges-level-currently">
