@@ -202,3 +202,8 @@ input {
   display: flex;
   justify-content: center;
 }
+
+.center-loading {
+  display: flex;
+  justify-content: center;
+}

@@ -8,8 +8,11 @@ const fetcher = (url) => fetch(url).then((r) => r.json());
 export default function Randomquestion() {
   const { data, error, isLoading } = useSWR("/api/question", fetcher);
 
-  if (error) return <div>Failed to load</div>;
-  if (isLoading) return <div>Loading recently added questions...</div>;
+  if (error) return <div className="center-loading">Failed to load</div>;
+  if (isLoading)
+    return (
+      <div className="center-loading">Loading recently added questions...</div>
+    );
 
   const randomQuestion = data[Math.floor(Math.random() * (data.length - 1))];
 

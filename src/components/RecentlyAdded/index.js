@@ -20,7 +20,7 @@ export default function RecentlyAdded() {
     );
   };
 
-  if (isLoading || error) return <h2>Loading...</h2>;
+  if (isLoading || error) return <h2 className="center-loading">Loading...</h2>;
 
   const sortedData = data.sort(
     (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
