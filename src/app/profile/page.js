@@ -42,7 +42,7 @@ export default function Profile() {
       setBadges("Unemployed");
     } else if (questionsAddedbyYou?.length <= 11) {
       setBadges("Possible hire");
-    } else if (questionsAddedbyYou?.length <= 12) {
+    } else if (questionsAddedbyYou?.length >= 12) {
       setBadges("Hiring managers dream");
     }
   };
