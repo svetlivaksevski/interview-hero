@@ -38,11 +38,11 @@ export default function Profile() {
   };
 
   const displayBadge = () => {
-    if (questionsAddedbyYou?.length <= 5) {
+    if (questionsAddedbyYou?.length <= 10) {
       setBadges("Unemployed");
-    } else if (questionsAddedbyYou?.length <= 10) {
+    } else if (questionsAddedbyYou?.length <= 11) {
       setBadges("Possible hire");
-    } else if (questionsAddedbyYou?.length <= 20) {
+    } else if (questionsAddedbyYou?.length <= 12) {
       setBadges("Hiring managers dream");
     }
   };
