@@ -9,7 +9,9 @@ export default function Home() {
       <div className="mainpage">
         <Header />
         <div className="intro-container">
-          <div className="styling-text-h1">What is Interview Hero?</div>
+          <div className="intro-homepage-heading">
+            Discover the answers to your questions in just a few clicks.
+          </div>
           <p className="intro-homepage">
             We&apos;re here to help you find your dream job! Our platform
             provides practical advice and tips for acing your interviews. With
