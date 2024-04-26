@@ -34,13 +34,18 @@ export default function Comments({ params, questionId, mutate }) {
   if (!comments) return;
 
   async function deleteComment(id) {
-    const response = await fetch(`/api/comment/${id}`, {
-      method: "DELETE",
-    });
-    if (response.ok) {
-      mutate();
-    } else {
-      console.error(response.status);
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this comment?"
+    );
+    if (isConfirmed) {
+      const response = await fetch(`/api/comment/${id}`, {
+        method: "DELETE",
+      });
+      if (response.ok) {
+        mutate();
+      } else {
+        console.error(response.status);
+      }
     }
   }
 

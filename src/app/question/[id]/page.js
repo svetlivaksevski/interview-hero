@@ -23,13 +23,18 @@ export default function QuestionPage({ params }) {
   if (!data) return;
 
   async function deleteQuestion() {
-    const response = await fetch(`/api/question/${id}`, {
-      method: "DELETE",
-    });
-    if (response.ok) {
-      router.push("/question");
-    } else {
-      console.error(response.status);
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this question?"
+    );
+    if (isConfirmed) {
+      const response = await fetch(`/api/question/${id}`, {
+        method: "DELETE",
+      });
+      if (response.ok) {
+        router.push("/question");
+      } else {
+        console.error(response.status);
+      }
     }
   }
 
